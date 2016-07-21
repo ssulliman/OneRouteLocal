@@ -27,10 +27,9 @@ workflow_sid = "WWff7e028b12767a53586b351a3b4b6afe"
 task_router = TwilioTaskRouterClient(account_sid, auth_token)
 
 
-import webbrowser
-webbrowser.open_new_tab("html/worker_login.html")
-
-
+@app.route('/')
+def worker_login():
+    return render_template('html/worker_login.html')
 
 # Define Flask routes
 @app.route("/get_worker_sid", methods=['GET'])
