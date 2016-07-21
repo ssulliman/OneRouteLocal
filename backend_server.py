@@ -28,9 +28,7 @@ task_router = TwilioTaskRouterClient(account_sid, auth_token)
 
 
 import webbrowser
-@app.route("/test", methods=['GET', 'POST'])
-def test():
-    webbrowser.open_new_tab("html/worker_login.html")
+webbrowser.open_new_tab("html/worker_login.html")
 
 
 
