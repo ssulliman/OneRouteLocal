@@ -88,4 +88,5 @@ def accept_reservation(task_sid, reservation_sid):
 
 if __name__ == "__main__":
     port = int(environ.get('PORT', 5000))
+    print "TEST PRINT"
     app.run(debug=True, host='0.0.0.0', port=port)
