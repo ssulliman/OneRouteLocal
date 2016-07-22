@@ -43,6 +43,8 @@
     </div> <!-- /container containing log in UI controls -->
 
   <script>
+  if(history.replaceState) history.replaceState({}, "", "/");
+
     function logUserIn() {
       var user = $("#inputEmail").val();
       var pass = $("#inputPassword").val();
