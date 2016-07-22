@@ -5,7 +5,7 @@ import json
 from bson import json_util
 
 # Flask import
-from flask import Flask, Response, request, render_template
+from flask import Flask, Response, request
 app = Flask(__name__)
 
 # Mongo import and connection to OneRoute database
@@ -26,16 +26,12 @@ workflow_sid = "WWff7e028b12767a53586b351a3b4b6afe"
 # Get our TaskRouter object
 task_router = TwilioTaskRouterClient(account_sid, auth_token)
 
-
-@app.route('/')
-def worker_login():
-    return render_template('worker_login.html')
-
 # Define Flask routes
-@app.route("/get_worker_sid", methods=['GET'])
+@app.route("/get_worker_sid", methods=['GET', 'POST'])
 def get_worker_sid():
     username = request.args.get('user')
     password = request.args.get('pass')
+    print "LOG IN REQUEST FOR:  " + username + " with PW: " + password
     cursor = db.workers.find({"username": + "\"" + username + "\"","password": + "\"" + password + "\""})
     for doc in cursor:
         json_doc = json.dumps(doc, default=json_util.default)
