@@ -7,13 +7,13 @@ The app is hosted on Heroku at https://one-route.herokuapp.com/. The main page i
 - brew install heroku
 - heroku git:remote -a one-route (might ask for log in info - please see below)
 
-###### Heroku Credentials:
+##### Heroku Credentials:
 - OneRouteDev@gmail.com
 - 1RouteDev
 
 Our MongoDB instance can be accessed via web client at www.mLab.com and logging in with the following credentials:
 
-###### mLabs Credentials: (Heroku's MongoDB provider)
+##### mLab Credentials: (Heroku's MongoDB provider)
 - OneRouteDev
 - 1RouteDev
 
