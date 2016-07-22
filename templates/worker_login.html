@@ -79,7 +79,8 @@
 
     function theCallback(responseText) {
       console.log("Made it to the callback...");
-      console.log(responseText)
+      //console.log(responseText)
+      console.log(responseText["worker_sid"])
       window.location.href = "https://one-route.herokuapp.com/worker_dashboard"
     }
 
@@ -89,8 +90,6 @@
         xmlHttp.onreadystatechange = function() { 
             if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
                 callback(xmlHttp.responseText);
-            else
-              console.log(xmlHttp.responseText)
         }
         xmlHttp.open("GET", theUrl, true); // true for asynchronous 
         xmlHttp.send(null);
