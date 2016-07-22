@@ -36,7 +36,7 @@ def root():
     return render_template('worker_login.html')
 
 @app.route("/worker_dashboard")
-def root():
+def show_worker_dashboard():
     return render_template('worker_dashboard.html')
 
 
