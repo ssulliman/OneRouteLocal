@@ -8,7 +8,7 @@ import json
 from bson import json_util
 
 # Flask import
-from flask import Flask, Response, jsonify, request, render_template
+from flask import Flask, flash, Response, jsonify, request, render_template
 app = Flask(__name__)
 
 # Mongo import and connection to OneRoute database
@@ -46,7 +46,9 @@ def show_worker_dashboard():
         return render_template('worker_dashboard.html')
     else:
         print "NOT A GOOD WORKER DASHBOARD REQUEST\n\n\n\n\n\n"
+        flash('NOT A GOOD WORKER DASHBOARD REQUEST')
         return Response("{}", status=204, mimetype='application/json')
+
 
 @app.route("/get_worker_details", methods=['GET', 'POST'])
 def get_worker_details():
