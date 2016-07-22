@@ -60,7 +60,7 @@ def get_worker_sid():
         cursor = db.workers.find(worker)
         for doc in cursor:
             json_doc = json.dumps(doc, default=json_util.default)
-            responseDict = json.loads(json_doc)
+            json_dict = json.loads(json_doc)
             responseDict["worker_sid"] = json_dict["worker_sid"]
             responseDict["worker_token"] = json_dict["worker_token"]
             print json_dict["worker_sid"]
@@ -71,7 +71,7 @@ def get_worker_sid():
         responseDict["worker_token"] = "WTF?"
 
     print responseDict
-    resp = Response(responseDict, status=200, mimetype='application/json')
+    resp = Response(jsonify(result=responseDict), status=200, mimetype='application/json')
     return resp;
 
 @app.route("/twilio_callback", methods=['GET', 'POST'])
