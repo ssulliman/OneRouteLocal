@@ -47,7 +47,7 @@ def show_worker_dashboard():
     else:
         print "NOT A GOOD WORKER DASHBOARD REQUEST\n\n\n\n\n\n"
         flash('NOT A GOOD WORKER DASHBOARD REQUEST')
-        return Response("{}", status=204, mimetype='application/json')
+        return render_template('worker_dashboard.html')
 
 
 @app.route("/get_worker_details", methods=['GET', 'POST'])

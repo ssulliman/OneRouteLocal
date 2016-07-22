@@ -7,8 +7,8 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-
 </head>
+
 <body>
 <div class="container">
   <h1>Welcome, <span id="welcome_name"></span>!</h1><br><br>
@@ -19,6 +19,23 @@
   <button id="idle_btn" type="button" class="btn btn-primary">Idle</button><br>
   <button id="reserved_btn" type="button" class="btn btn-primary">Reserved</button>
 </div>
+
+
+<div class="container" style="min-height:100% width:80%">
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-warning alert-dismissible" role="alert">
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">× HAII</span></button>
+    {{message}}
+    </div>
+  {% endfor %}
+  {% endif %}
+{% endwith %}
+
+{% block body %}{% endblock %}
+</div>
+
 
 <script>
 function get(name){
