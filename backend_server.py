@@ -29,7 +29,7 @@ task_router = TwilioTaskRouterClient(account_sid, auth_token)
 
 @app.route('/')
 def worker_login():
-    return render_template('html/worker_login.html')
+    return render_template('worker_login.html')
 
 # Define Flask routes
 @app.route("/get_worker_sid", methods=['GET'])
