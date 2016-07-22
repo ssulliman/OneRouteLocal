@@ -80,8 +80,9 @@
       return false;//return (user == "test@test.com" && pass == "test");
     }
 
-    function theCallback() {
+    function theCallback(responseText) {
       console.log("Made it to the callback...");
+      console.log(responseText)
       window.location.href = "https://one-route.herokuapp.com/worker_dashboard"
     }
 
