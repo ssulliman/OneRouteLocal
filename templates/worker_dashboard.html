@@ -11,7 +11,7 @@
 </head>
 <body>
 <div class="container">
-  <h1>Welcome, Worker 1!</h1><br><br>
+  <h1>Welcome, <span id="welcome_name"></span>!</h1><br><br>
 
   <h2 class="jqValue">Your current worker state: Idle</h2><br>
   <button id="active_btn" type="button" class="btn btn-primary">Active</button><br>
@@ -31,27 +31,27 @@ var auth_token  = "86f3177a99d46d4cb6237b106be7bd9c"
 var workspace_sid = "WSa521ebd8b208fe727465ceb9c92bfc52"
 var worker_sid = get("worker_sid")
 var worker_token = get("worker_token")
+var worker_name = get("worker_name")
 
 if(history.replaceState) history.replaceState({}, "", "/worker_dashboard.html");
-
-console.log(worker_sid + "\n" + worker_token)
+document.getElementById('welcome_name').innerHTML = worker_name;
 
 var $jqValue = $('.jqValue');
 
 $('#active_btn').click(function () {
-  $jqValue.text('Your current Worker State:  Active');
+  $jqValue.text('Your current worker state:  Active');
 });
 
 $('#busy_btn').click(function () {
-  $jqValue.text('Your current Worker State:  Busy');
+  $jqValue.text('Your current worker state:  Busy');
 });
 
 $('#idle_btn').click(function () {
-  $jqValue.text('Your current Worker State:  Idle');
+  $jqValue.text('Your current worker state:  Idle');
 });
 
 $('#reserved_btn').click(function () {
-  $jqValue.text('Your current Worker State:  Reserved');
+  $jqValue.text('Your current worker state:  Reserved');
 });
 </script>
 
