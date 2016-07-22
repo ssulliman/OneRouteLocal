@@ -71,6 +71,7 @@ def get_worker_sid():
         responseDict["worker_token"] = "WTF?"
 
     print responseDict
+    print jsonify(result=responseDict)
     resp = Response(jsonify(result=responseDict), status=200, mimetype='application/json')
     return resp;
 
