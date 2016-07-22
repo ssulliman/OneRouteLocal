@@ -70,7 +70,8 @@ def get_worker_sid():
         responseDict["worker_sid"] = ""
         responseDict["worker_token"] = ""
 
-    resp = Response(jsonify(**responseDict), status=200, mimetype='application/json')
+    print responseDict
+    resp = Response(responseDict, status=200, mimetype='application/json')
     return resp;
 
 @app.route("/twilio_callback", methods=['GET', 'POST'])

@@ -73,14 +73,14 @@
       var user = $("#inputEmail").val();
       var pass = $("#inputPassword").val();
 
-      console.log("https://one-route.herokuapp.com/get_worker_sid?user=" + user + "&pass=" + pass)
       httpGetAsync("https://one-route.herokuapp.com/get_worker_sid?user=" + user + "&pass=" + pass, theCallback);
     }
 
     function theCallback(responseText) {
       console.log("Made it to the callback...");
-      //console.log(responseText)
-      console.log(responseText["worker_sid"])
+      console.log("responseText:" + responseText)
+      console.log("Worker sid: " + responseText["worker_sid"])
+
       window.location.href = "https://one-route.herokuapp.com/worker_dashboard"
     }
 
