@@ -8,7 +8,7 @@ import json
 from bson import json_util
 
 # Flask import
-from flask import Flask, Response, request, render_template
+from flask import Flask, Response, jsonify, request, render_template
 app = Flask(__name__)
 
 # Mongo import and connection to OneRoute database
@@ -52,7 +52,7 @@ def get_worker_sid():
     worker[username] = username
     worker[password] = password
 
-    responseText = {}
+    responseDict = {}
 
     cursor_count = db.workers.find(worker).count()
 
@@ -60,17 +60,17 @@ def get_worker_sid():
         cursor = db.workers.find(worker)
         for doc in cursor:
             json_doc = json.dumps(doc, default=json_util.default)
-            responseText = json.loads(json_doc)
-            responseText["worker_sid"] = json_dict["worker_sid"]
-            responseText["worker_token"] = json_dict["worker_token"]
+            responseDict = json.loads(json_doc)
+            responseDict["worker_sid"] = json_dict["worker_sid"]
+            responseDict["worker_token"] = json_dict["worker_token"]
             print json_dict["worker_sid"]
             print json_dict["worker_token"]
     else:
         print "Got 0 results from mongodb - check connection or db content +++++++++++++++++++"
-        responseText["worker_sid"] = ""
-        responseText["worker_token"] = ""
+        responseDict["worker_sid"] = ""
+        responseDict["worker_token"] = ""
 
-    resp = Response(responseText, status=200, mimetype='application/json')
+    resp = Response(jsonify(responseDict), status=200, mimetype='application/json')
     return resp;
 
 @app.route("/twilio_callback", methods=['GET', 'POST'])
