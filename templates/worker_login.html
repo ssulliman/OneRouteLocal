@@ -78,16 +78,17 @@
 
     function theCallback(responseText) {
       console.log("Made it to the callback...");
-      console.log(responseText)
-      var data = JSON.parse(responseText); // this will convert your json string to a javascript object
+      var responseData = JSON.parse(responseText);
 
-      for (var key in data) {
-          if (data.hasOwnProperty(key)) { // this will check if key is owned by data object and not by any of it's ancestors
-              alert(key+': '+data[key]); // this will show each key with it's value
-          }
-}      console.log("Worker sid: " + data["worker_sid"])
+      var worker_sid = responseData["worker_sid"];
+      var worker_token = responseData["worker_token"]
 
-      window.location.href = "https://one-route.herokuapp.com/worker_dashboard"
+      if (worker_sid.length > 0 && worker_token.length > 0) {
+        window.location.href = "https://one-route.herokuapp.com/worker_dashboard"
+      }
+      else {
+        alert("Incorrect username or password! Please try again.")
+      }
     }
 
     function httpGetAsync(theUrl, callback)

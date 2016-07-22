@@ -39,6 +39,10 @@ task_router = TwilioTaskRouterClient(account_sid, auth_token)
 def root():
     return render_template('worker_login.html')
 
+@app.route("/add_worker")
+def add_dummy_worker():
+    db.workers.insert()
+
 @app.route("/worker_dashboard")
 def show_worker_dashboard():
     return render_template('worker_dashboard.html')
@@ -46,8 +50,8 @@ def show_worker_dashboard():
 
 @app.route("/get_worker_sid", methods=['GET', 'POST'])
 def get_worker_sid():
-    username = str(request.args.get('user'))
-    password = str(request.args.get('pass'))
+    username = request.args.get('user')
+    password = request.args.get('pass')
     worker = {}
     worker[username] = username
     worker[password] = password
@@ -65,8 +69,8 @@ def get_worker_sid():
             responseDict["worker_token"] = json_dict["worker_token"]
     else:
         print "Got 0 results from mongodb - check connection or db content +++++++++++++++++++\n\n\n\n"
-        responseDict["worker_sid"] = "NONE"
-        responseDict["worker_token"] = "WTF?"
+        responseDict["worker_sid"] = ""
+        responseDict["worker_token"] = ""
 
     print responseDict
     return jsonify(responseDict);
