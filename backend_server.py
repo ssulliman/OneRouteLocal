@@ -48,6 +48,7 @@ def show_worker_dashboard():
 def get_worker_sid():
     username = str(request.args.get('user'))
     password = str(request.args.get('pass'))
+    worker = {}
     worker[username] = username
     worker[password] = password
     print "LOG IN REQUEST FOR:  " + username + " with PW: " + password
