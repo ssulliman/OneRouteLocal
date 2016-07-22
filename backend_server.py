@@ -50,11 +50,15 @@ def get_worker_sid():
     password = str(request.args.get('pass'))
     print "LOG IN REQUEST FOR:  " + username + " with PW: " + password
     cursor = db.workers.find({"username:" + "\"" + username + "\",password:" + "\"" + password + "\""})
-    for doc in cursor:
-        json_doc = json.dumps(doc, default=json_util.default)
-        json_dict = json.loads(json_doc)
-        print json_dict["worker_sid"]
-        print json_dict["worker_token"]
+
+    if cursor is not None:
+        for doc in cursor:
+            json_doc = json.dumps(doc, default=json_util.default)
+            json_dict = json.loads(json_doc)
+            print json_dict["worker_sid"]
+            print json_dict["worker_token"]
+    else:
+        print "Got None response from mongodb - check connection +++++++++++++++++++"
 
     resp = Response("{}", status=200, mimetype='application/json')
     return resp;
