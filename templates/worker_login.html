@@ -79,12 +79,11 @@
     function theCallback(responseText) {
       console.log("Made it to the callback...");
       var responseData = JSON.parse(responseText);
-      console.log(responseData);
       var worker_sid = responseData["worker_sid"];
       var worker_token = responseData["worker_token"];
 
       if (worker_sid.length > 0 && worker_token.length > 0) {
-        window.location.href = "https://one-route.herokuapp.com/worker_dashboard"
+        window.location.href = "https://one-route.herokuapp.com/worker_dashboard?worker_sid=" + worker_sid + "&worker_token=" + worker_token;
       }
       else {
         alert("Incorrect username or password! Please try again.");
