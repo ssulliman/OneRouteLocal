@@ -92,6 +92,9 @@ def twilio_callback():
 def assignment_callback():
     """Respond to assignment callbacks with empty 200 response"""
     
+    # TODO - add/update task/event to mongodb
+    print "MADE IT TO THE ASSIGNMENT_CALLBACK\n\n\n"
+
     resp = Response("{}", status=200, mimetype='application/json')
     return resp
 
@@ -99,8 +102,7 @@ def assignment_callback():
 @app.route("/create_task", methods=['GET', 'POST'])
 def create_task():
     """Create a task with a given list of attributes"""
-    task_data = request.data
-    task_dict = json.loads(task_data)
+    task_dict = json.loads(request.data)
     task_attributes = task_dict["task_attributes"]
 
     task = task_router.tasks(workspace_sid).create(
