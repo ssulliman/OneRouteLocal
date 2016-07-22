@@ -79,7 +79,8 @@
     function theCallback(responseText) {
       console.log("Made it to the callback...");
       console.log("responseText:" + responseText)
-      console.log("Worker sid: " + responseText["worker_sid"])
+      responseDict = json.loads(responseText)[0];
+      console.log("Worker sid: " + responseDict["worker_sid"])
 
       window.location.href = "https://one-route.herokuapp.com/worker_dashboard"
     }
