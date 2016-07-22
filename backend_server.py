@@ -13,8 +13,12 @@ app = Flask(__name__)
 
 # Mongo import and connection to OneRoute database
 from pymongo import MongoClient
-mongo_client = MongoClient('mongodb://localhost:27017/')
-db = mongo_client.OneRoute
+# The following is the MongoDB URI that we obtain from mLab
+# mLab is our Heroku MongoDB provider
+mongo_user = "one_route_dev"
+mongo_pass = "oneroutedev"
+mongo_client = MongoClient('mongodb://' + mongo_user + ':' + mongo_pass + '@ds027145.mlab.com:27145/one_route')
+db = mongo_client.one_route
 
 # Twilio import
 from twilio.rest import TwilioTaskRouterClient, TwilioRestClient
