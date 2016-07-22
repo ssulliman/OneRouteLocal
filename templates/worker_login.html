@@ -76,12 +76,13 @@
       console.log("https://one-route.herokuapp.com/get_worker_sid?user=" + user + "&pass=" + pass)
       httpGetAsync("https://one-route.herokuapp.com/get_worker_sid?user=" + user + "&pass=" + pass, theCallback);
 
-      window.location.href = "https://one-route.herokuapp.com/worker_dashboard"
-      return true;//return (user == "test@test.com" && pass == "test");
+      //window.location.href = "https://one-route.herokuapp.com/worker_dashboard"
+      return false;//return (user == "test@test.com" && pass == "test");
     }
 
     function theCallback() {
       console.log("Made it to the callback...");
+      window.location.href = "https://one-route.herokuapp.com/worker_dashboard"
     }
 
     function httpGetAsync(theUrl, callback)
