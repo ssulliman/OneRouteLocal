@@ -52,19 +52,25 @@ def get_worker_sid():
     worker[username] = username
     worker[password] = password
 
+    responseText = {}
+
     cursor_count = db.workers.find(worker).count()
 
     if cursor_count > 0:
         cursor = db.workers.find(worker)
         for doc in cursor:
             json_doc = json.dumps(doc, default=json_util.default)
-            json_dict = json.loads(json_doc)
+            responseText = json.loads(json_doc)
+            responseText["worker_sid"] = json_dict["worker_sid"]
+            responseText["worker_token"] = json_dict["worker_token"]
             print json_dict["worker_sid"]
             print json_dict["worker_token"]
     else:
         print "Got 0 results from mongodb - check connection or db content +++++++++++++++++++"
+        responseText["worker_sid"] = ""
+        responseText["worker_token"] = ""
 
-    resp = Response("{}", status=200, mimetype='application/json')
+    resp = Response(responseText, status=200, mimetype='application/json')
     return resp;
 
 @app.route("/twilio_callback", methods=['GET', 'POST'])
