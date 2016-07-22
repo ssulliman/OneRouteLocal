@@ -45,6 +45,7 @@ def show_worker_dashboard():
     if (friendly_name):
         return render_template('worker_dashboard.html')
     else:
+        print "NOT A GOOD WORKER DASHBOARD REQUEST\n\n\n\n\n\n"
         return Response("{}", status=204, mimetype='application/json')
 
 @app.route("/get_worker_details", methods=['GET', 'POST'])
