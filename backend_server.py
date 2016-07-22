@@ -33,6 +33,7 @@ task_router = TwilioTaskRouterClient(account_sid, auth_token)
 
 @app.route("/")
 def root():
+    print "SERVE MAIN PAGE"
     return app.send_static_file('templates/worker_login.html')
 
 @app.route("/get_worker_sid", methods=['GET', 'POST'])
@@ -93,5 +94,4 @@ def accept_reservation(task_sid, reservation_sid):
 
 if __name__ == "__main__":
     port = int(environ.get('PORT', 5000))
-    print "TEST PRINT"
     app.run(debug=True, host='0.0.0.0', port=port)
