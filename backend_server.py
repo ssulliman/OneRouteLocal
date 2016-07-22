@@ -35,6 +35,11 @@ task_router = TwilioTaskRouterClient(account_sid, auth_token)
 def root():
     return render_template('worker_login.html')
 
+@app.route("/worker_dashboard")
+def root():
+    return render_template('worker_dashboard.html')
+
+
 @app.route("/get_worker_sid", methods=['GET', 'POST'])
 def get_worker_sid():
     username = str(request.args.get('user'))
