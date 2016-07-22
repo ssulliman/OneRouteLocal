@@ -107,8 +107,8 @@ def create_task():
 #        workflow_sid=workflow_sid,
 #        attributes='{"selected_language":"ru"}'
 #        )
-    #print task.sid
-    resp = Response(jsonify(task_data), status=200, mimetype='application/json')
+    #print task.sid.0
+    resp = Response(jsonify(task_dict), status=200, mimetype='application/json')
     return resp
 
 
