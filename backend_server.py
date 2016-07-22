@@ -30,6 +30,11 @@ workflow_sid = "WWff7e028b12767a53586b351a3b4b6afe"
 task_router = TwilioTaskRouterClient(account_sid, auth_token)
 
 # Define Flask routes
+
+@app.route("/")
+def root():
+    return app.send_static_file('templates/worker_login.html')
+
 @app.route("/get_worker_sid", methods=['GET', 'POST'])
 def get_worker_sid():
     username = str(request.args.get('user'))
