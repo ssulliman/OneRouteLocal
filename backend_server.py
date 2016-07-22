@@ -47,7 +47,7 @@ def show_worker_dashboard():
         return render_template('worker_dashboard.html')
     else:
         print "NOT A GOOD WORKER DASHBOARD REQUEST\n\n\n\n\n\n"
-        flash('NOT A GOOD WORKER DASHBOARD REQUEST')
+        flash('Permission denied: cannot access worker dashboard without logging in')
         return render_template('worker_login.html')
 
 
