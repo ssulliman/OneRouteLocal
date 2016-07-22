@@ -50,15 +50,11 @@ def get_worker_sid():
     username = request.args.get('user')
     password = request.args.get('pass')
 
-    mongo_query_string = 'username':username,'password':password
-
-    responseDict = {}
-
-    cursor_count = db.workers.find({mongo_query_string}).count()
+    cursor_count = db.workers.find({'username':username,'password':password}).count()
     print "Worker query returned " + str(cursor_count) + " results.\n\n\n\n\n"
 
     if cursor_count > 0:
-        cursor = db.workers.find({mongo_query_string})
+        cursor = db.workers.find({'username':username,'password':password})
         for doc in cursor:
             json_doc = json.dumps(doc, default=json_util.default)
             json_dict = json.loads(json_doc)
