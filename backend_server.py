@@ -48,13 +48,15 @@ def show_worker_dashboard():
 def get_worker_sid():
     username = str(request.args.get('user'))
     password = str(request.args.get('pass'))
+    worker[username] = username
+    worker[password] = password
     print "LOG IN REQUEST FOR:  " + username + " with PW: " + password
 
 
-    cursor_count = db.workers.find({"username:" + "\"" + username + "\",password:" + "\"" + password + "\""}).count()
+    cursor_count = db.workers.find(worker).count()
 
     if cursor_count > 0:
-        cursor = db.workers.find({"username:" + "\"" + username + "\",password:" + "\"" + password + "\""})
+        cursor = db.workers.find(worker)
         for doc in cursor:
             json_doc = json.dumps(doc, default=json_util.default)
             json_dict = json.loads(json_doc)
