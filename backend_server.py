@@ -63,17 +63,13 @@ def get_worker_sid():
             json_dict = json.loads(json_doc)
             responseDict["worker_sid"] = json_dict["worker_sid"]
             responseDict["worker_token"] = json_dict["worker_token"]
-            print json_dict["worker_sid"]
-            print json_dict["worker_token"]
     else:
         print "Got 0 results from mongodb - check connection or db content +++++++++++++++++++"
         responseDict["worker_sid"] = "NONE"
         responseDict["worker_token"] = "WTF?"
 
     print responseDict
-    print jsonify(result=responseDict)
-    resp = Response(jsonify(result=responseDict), status=200, mimetype='application/json')
-    return resp;
+    return jsonify(result=responseDict);
 
 @app.route("/twilio_callback", methods=['GET', 'POST'])
 def twilio_callback():
