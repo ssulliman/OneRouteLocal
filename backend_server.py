@@ -34,7 +34,6 @@ workflow_sid = "WWff7e028b12767a53586b351a3b4b6afe"
 task_router = TwilioTaskRouterClient(account_sid, auth_token)
 
 # Define Flask routes
-
 @app.route("/")
 def root():
     return render_template('worker_login.html')
@@ -59,15 +58,11 @@ def get_worker_sid():
         cursor = db.workers.find({'username':username,'password':password})
         for doc in cursor:
             json_doc = json.dumps(doc, default=json_util.default)
-            json_dict = json.loads(json_doc)
-            responseDict["worker_sid"] = json_dict["worker_sid"]
-            responseDict["worker_token"] = json_dict["worker_token"]
+            json_dict = responseDict = json.loads(json_doc)
     else:
-        print "Got 0 results from mongodb - check connection or db content +++++++++++++++++++\n\n\n\n"
         responseDict["worker_sid"] = ""
         responseDict["worker_token"] = ""
 
-    print responseDict
     return jsonify(responseDict);
 
 @app.route("/twilio_callback", methods=['GET', 'POST'])
