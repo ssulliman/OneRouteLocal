@@ -35,7 +35,7 @@ def get_worker_sid():
     username = str(request.args.get('user'))
     password = str(request.args.get('pass'))
     print "LOG IN REQUEST FOR:  " + username + " with PW: " + password
-    cursor = db.workers.find({"username": + "\"" + username + "\"","password": + "\"" + password + "\""})
+    cursor = db.workers.find({"username:" + "\"" + username + "\",password:" + "\"" + password + "\""})
     for doc in cursor:
         json_doc = json.dumps(doc, default=json_util.default)
         json_dict = json.loads(json_doc)
