@@ -8,7 +8,7 @@ import json
 from bson import json_util
 
 # Flask import
-from flask import Flask, Response, request
+from flask import Flask, Response, request, render_template
 app = Flask(__name__)
 
 # Mongo import and connection to OneRoute database
@@ -33,8 +33,7 @@ task_router = TwilioTaskRouterClient(account_sid, auth_token)
 
 @app.route("/")
 def root():
-    print "SERVE MAIN PAGE"
-    return app.send_static_file('templates/worker_login.html')
+    return render_template('worker_login.html')
 
 @app.route("/get_worker_sid", methods=['GET', 'POST'])
 def get_worker_sid():
