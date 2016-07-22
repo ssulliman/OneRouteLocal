@@ -53,6 +53,8 @@ def get_worker_sid():
     cursor_count = db.workers.find({'username':username,'password':password}).count()
     print "Worker query returned " + str(cursor_count) + " results.\n\n\n\n\n"
 
+    responseDict = {}
+
     if cursor_count > 0:
         cursor = db.workers.find({'username':username,'password':password})
         for doc in cursor:
