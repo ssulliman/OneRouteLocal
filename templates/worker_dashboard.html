@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Worker State</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<div class="container">
+  <h1>Welcome, Worker 1!</h1><br><br>
+
+  <h2 class="jqValue">Your current worker state: Idle</h2><br>
+  <button id="active_btn" type="button" class="btn btn-primary">Active</button><br>
+  <button id="busy_btn" type="button" class="btn btn-primary">Busy</button><br>
+  <button id="idle_btn" type="button" class="btn btn-primary">Idle</button><br>
+  <button id="reserved_btn" type="button" class="btn btn-primary">Reserved</button>
+</div>
+
+<script>
+var account_sid = "ACc9111e5c0efc0644b4e754bf2183c1c2"
+var auth_token  = "86f3177a99d46d4cb6237b106be7bd9c"
+var workspace_sid = "WSa521ebd8b208fe727465ceb9c92bfc52"
+
+
+
+var $jqValue = $('.jqValue');
+
+$('#active_btn').click(function () {
+  $jqValue.text('Current Worker State:  Active');
+});
+
+$('#busy_btn').click(function () {
+  $jqValue.text('Current Worker State:  Busy');
+});
+
+$('#idle_btn').click(function () {
+  $jqValue.text('Current Worker State:  Idle');
+});
+
+$('#reserved_btn').click(function () {
+  $jqValue.text('Current Worker State:  Reserved');
+});
+</script>
+
+</body>
+</html>
+
