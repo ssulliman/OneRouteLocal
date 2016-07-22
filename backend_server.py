@@ -101,6 +101,7 @@ def create_task():
     """Create a task with a given list of attributes"""
     task_data = request.data
     task_dict = json.loads(task_data)
+    print "TASK_DICT"
     print task_dict["task_attributes"]
 
 #    task = task_router.tasks(workspace_sid).create(
