@@ -39,11 +39,6 @@ task_router = TwilioTaskRouterClient(account_sid, auth_token)
 def root():
     return render_template('worker_login.html')
 
-@app.route("/add_worker")
-def add_dummy_worker():
-    db.workers.insert({"username":"test@test.com", "password":"test", "worker_sid":"WK46c16e3fb0551241f479f0031d473162", "worker_token":"eyJhbGciOiAiSFMyNTYiLCAidHlwIjogIkpXVCJ9.eyJleHAiOiAxNTU1NTU2MTMwLCAiaXNzIjogIkFDMTgxNzVhMjM2OWY0YjMyNTA3YzEyNTQ5YThhNmI0NGYiLCAid29ya3NwYWNlX3NpZCI6ICJXUzQzMjA2YjM2ODc4OGRlMjAyN2M1NTFmY2Y3MjY0NTAwIiwgImZyaWVuZGx5X25hbWUiOiAiV0s0NmMxNmUzZmIwNTUxMjQxZjQ3OWYwMDMxZDQ3MzE2MiIsICJhY2NvdW50X3NpZCI6ICJBQzE4MTc1YTIzNjlmNGIzMjUwN2MxMjU0OWE4YTZiNDRmIiwgInZlcnNpb24iOiAidjEiLCAicG9saWNpZXMiOiBbeyJ1cmwiOiAiaHR0cHM6Ly9ldmVudC1icmlkZ2UudHdpbGlvLmNvbS92MS93c2NoYW5uZWxzL0FDMTgxNzVhMjM2OWY0YjMyNTA3YzEyNTQ5YThhNmI0NGYvV0s0NmMxNmUzZmIwNTUxMjQxZjQ3OWYwMDMxZDQ3MzE2MiIsICJwb3N0X2ZpbHRlciI6IHt9LCAibWV0aG9kIjogIkdFVCIsICJhbGxvdyI6IHRydWUsICJxdWVyeV9maWx0ZXIiOiB7fX0sIHsidXJsIjogImh0dHBzOi8vZXZlbnQtYnJpZGdlLnR3aWxpby5jb20vdjEvd3NjaGFubmVscy9BQzE4MTc1YTIzNjlmNGIzMjUwN2MxMjU0OWE4YTZiNDRmL1dLNDZjMTZlM2ZiMDU1MTI0MWY0NzlmMDAzMWQ0NzMxNjIiLCAicG9zdF9maWx0ZXIiOiB7fSwgIm1ldGhvZCI6ICJQT1NUIiwgImFsbG93IjogdHJ1ZSwgInF1ZXJ5X2ZpbHRlciI6IHt9fSwgeyJ1cmwiOiAiaHR0cHM6Ly90YXNrcm91dGVyLnR3aWxpby5jb20vdjEvV29ya3NwYWNlcy9XUzQzMjA2YjM2ODc4OGRlMjAyN2M1NTFmY2Y3MjY0NTAwL1dvcmtlcnMvV0s0NmMxNmUzZmIwNTUxMjQxZjQ3OWYwMDMxZDQ3MzE2MiIsICJwb3N0X2ZpbHRlciI6IHt9LCAibWV0aG9kIjogIkdFVCIsICJhbGxvdyI6IHRydWUsICJxdWVyeV9maWx0ZXIiOiB7fX0sIHsidXJsIjogImh0dHBzOi8vdGFza3JvdXRlci50d2lsaW8uY29tL3YxL1dvcmtzcGFjZXMvV1M0MzIwNmIzNjg3ODhkZTIwMjdjNTUxZmNmNzI2NDUwMC9BY3Rpdml0aWVzIiwgInBvc3RfZmlsdGVyIjoge30sICJtZXRob2QiOiAiR0VUIiwgImFsbG93IjogdHJ1ZSwgInF1ZXJ5X2ZpbHRlciI6IHt9fSwgeyJ1cmwiOiAiaHR0cHM6Ly90YXNrcm91dGVyLnR3aWxpby5jb20vdjEvV29ya3NwYWNlcy9XUzQzMjA2YjM2ODc4OGRlMjAyN2M1NTFmY2Y3MjY0NTAwL1Rhc2tzLyoqIiwgInBvc3RfZmlsdGVyIjoge30sICJtZXRob2QiOiAiR0VUIiwgImFsbG93IjogdHJ1ZSwgInF1ZXJ5X2ZpbHRlciI6IHt9fSwgeyJ1cmwiOiAiaHR0cHM6Ly90YXNrcm91dGVyLnR3aWxpby5jb20vdjEvV29ya3NwYWNlcy9XUzQzMjA2YjM2ODc4OGRlMjAyN2M1NTFmY2Y3MjY0NTAwL1dvcmtlcnMvV0s0NmMxNmUzZmIwNTUxMjQxZjQ3OWYwMDMxZDQ3MzE2Mi9SZXNlcnZhdGlvbnMvKioiLCAicG9zdF9maWx0ZXIiOiB7fSwgIm1ldGhvZCI6ICJHRVQiLCAiYWxsb3ciOiB0cnVlLCAicXVlcnlfZmlsdGVyIjoge319LCB7InVybCI6ICJodHRwczovL3Rhc2tyb3V0ZXIudHdpbGlvLmNvbS92MS9Xb3Jrc3BhY2VzL1dTNDMyMDZiMzY4Nzg4ZGUyMDI3YzU1MWZjZjcyNjQ1MDAvV29ya2Vycy9XSzQ2YzE2ZTNmYjA1NTEyNDFmNDc5ZjAwMzFkNDczMTYyIiwgInBvc3RfZmlsdGVyIjogeyJBY3Rpdml0eVNpZCI6IHsicmVxdWlyZWQiOiB0cnVlfX0sICJtZXRob2QiOiAiUE9TVCIsICJhbGxvdyI6IHRydWUsICJxdWVyeV9maWx0ZXIiOiB7fX0sIHsidXJsIjogImh0dHBzOi8vdGFza3JvdXRlci50d2lsaW8uY29tL3YxL1dvcmtzcGFjZXMvV1M0MzIwNmIzNjg3ODhkZTIwMjdjNTUxZmNmNzI2NDUwMC9UYXNrcy8qKiIsICJwb3N0X2ZpbHRlciI6IHt9LCAibWV0aG9kIjogIlBPU1QiLCAiYWxsb3ciOiB0cnVlLCAicXVlcnlfZmlsdGVyIjoge319LCB7InVybCI6ICJodHRwczovL3Rhc2tyb3V0ZXIudHdpbGlvLmNvbS92MS9Xb3Jrc3BhY2VzL1dTNDMyMDZiMzY4Nzg4ZGUyMDI3YzU1MWZjZjcyNjQ1MDAvV29ya2Vycy9XSzQ2YzE2ZTNmYjA1NTEyNDFmNDc5ZjAwMzFkNDczMTYyL1Jlc2VydmF0aW9ucy8qKiIsICJwb3N0X2ZpbHRlciI6IHt9LCAibWV0aG9kIjogIlBPU1QiLCAiYWxsb3ciOiB0cnVlLCAicXVlcnlfZmlsdGVyIjoge319XSwgImNoYW5uZWwiOiAiV0s0NmMxNmUzZmIwNTUxMjQxZjQ3OWYwMDMxZDQ3MzE2MiIsICJ3b3JrZXJfc2lkIjogIldLNDZjMTZlM2ZiMDU1MTI0MWY0NzlmMDAzMWQ0NzMxNjIifQ.Lgu1yK6l3aqcbpfqPGdf7A604FS49oU3OZWFjJNpZ3g"})
-    resp = Response("{}", status=200, mimetype='application/json')
-    return resp
 
 @app.route("/worker_dashboard")
 def show_worker_dashboard():
@@ -54,17 +49,16 @@ def show_worker_dashboard():
 def get_worker_sid():
     username = request.args.get('user')
     password = request.args.get('pass')
-    worker = {}
-    worker[username] = username
-    worker[password] = password
+
+    mongo_query_string = 'username':username,'password':password
 
     responseDict = {}
 
-    cursor_count = db.workers.find(worker).count()
+    cursor_count = db.workers.find({mongo_query_string}).count()
     print "Worker query returned " + str(cursor_count) + " results.\n\n\n\n\n"
 
     if cursor_count > 0:
-        cursor = db.workers.find(worker)
+        cursor = db.workers.find({mongo_query_string})
         for doc in cursor:
             json_doc = json.dumps(doc, default=json_util.default)
             json_dict = json.loads(json_doc)
