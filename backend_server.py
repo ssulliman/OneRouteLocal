@@ -29,7 +29,7 @@ from twilio.rest.exceptions import TwilioRestException
 account_sid = "ACc9111e5c0efc0644b4e754bf2183c1c2"
 auth_token  = "86f3177a99d46d4cb6237b106be7bd9c"
 workspace_sid = "WSa521ebd8b208fe727465ceb9c92bfc52"
-workflow_sid = "WWff7e028b12767a53586b351a3b4b6afe"
+workflow_sid = "WW23312adca9ce4cf87cc3488c1b6dde5d"
 
 # Get our TaskRouter object
 task_router = TwilioTaskRouterClient(account_sid, auth_token)
@@ -102,6 +102,9 @@ def assignment_callback():
 @app.route("/create_task", methods=['GET', 'POST'])
 def create_task():
     """Create a task with a given list of attributes"""
+    print request
+    print request.data
+    print request.json
     task_dict = json.loads(request.data)
     task_attributes = task_dict["task_attributes"]
 

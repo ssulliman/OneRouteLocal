@@ -15,7 +15,7 @@ workerMap = {}
 def main():
 	# Read CSV and collect workers/attributes
 	with open('TwilioWorkers.csv', 'rb') as csv_file:
-	    reader = csv.reader(csv_file, delimiter=',')
+	    reader = csv.reader(csv_file, delimiter=',', escapechar="\\")
 	    for row in reader:
 	    	# ignore first row because its just header
 	    	if (row[0] != 'Worker Name'):
