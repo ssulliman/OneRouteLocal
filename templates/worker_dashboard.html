@@ -21,7 +21,6 @@
 </div>
 
 <script>
-if(history.replaceState) history.replaceState({}, "", "/worker_dashboard.html");
 function get(name){
    if(name=(new RegExp('[?&]'+encodeURIComponent(name)+'=([^&]*)')).exec(location.search))
       return decodeURIComponent(name[1]);
@@ -32,6 +31,8 @@ var auth_token  = "86f3177a99d46d4cb6237b106be7bd9c"
 var workspace_sid = "WSa521ebd8b208fe727465ceb9c92bfc52"
 var worker_sid = get("worker_sid")
 var worker_token = get("worker_token")
+
+if(history.replaceState) history.replaceState({}, "", "/worker_dashboard.html");
 
 console.log(worker_sid + "\n" + worker_token)
 
