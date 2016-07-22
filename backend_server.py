@@ -1,5 +1,8 @@
 #!/usr/local/bin/python2.7
 
+# Use to get port # from Heroku
+from os import environ
+
 # JSON import
 import json
 from bson import json_util
