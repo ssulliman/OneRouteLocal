@@ -2,7 +2,9 @@
 
 import requests
 
-result = requests.post("http://10.206.40.37:8080/assignment_callback")
+task_attributes = {"task_attributes":"value1"}
+
+result = requests.post("https://one-route.herokuapp.com/create_task", data={ "task_attributes": task_attributes })
 
 print result
 

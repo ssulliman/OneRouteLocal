@@ -98,13 +98,17 @@ def assignment_callback():
 
 @app.route("/create_task", methods=['GET', 'POST'])
 def create_task():
-    """Create a task"""
-    task = task_router.tasks(workspace_sid).create(
-        workflow_sid=workflow_sid,
-        attributes='{"selected_language":"ru"}'
-        )
-    print task.sid
-    resp = Response(task.attributes, status=200, mimetype='application/json')
+    """Create a task with a given list of attributes"""
+    task_data = request.data
+    task_dict = json.loads(task_data)
+    print task_dict["task_attributes"]
+
+#    task = task_router.tasks(workspace_sid).create(
+#        workflow_sid=workflow_sid,
+#        attributes='{"selected_language":"ru"}'
+#        )
+    #print task.sid
+    resp = Response(jsonify(task_dict), status=200, mimetype='application/json')
     return resp
 
 
