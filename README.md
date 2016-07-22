@@ -7,8 +7,8 @@ Heroku Credentials:
 - 1RouteDev
 
 To get set up for development - please clone this repo and create a corresponding heroku remote repo.
--brew install heroku
--heroku git:remote -a one-route
+- brew install heroku
+- heroku git:remote -a one-route
 
 Now when you push to this repo using "git push" --> also push to Heroku for deployment using "git push heroku master"
 
