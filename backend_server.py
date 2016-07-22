@@ -44,7 +44,7 @@ def show_worker_dashboard():
     return render_template('worker_dashboard.html')
 
 
-@app.route("/get_worker_sid", methods=['GET', 'POST'])
+@app.route("/get_worker_details", methods=['GET', 'POST'])
 def get_worker_sid():
     username = request.args.get('user')
     password = request.args.get('pass')
@@ -64,6 +64,13 @@ def get_worker_sid():
         responseDict["worker_token"] = ""
 
     return jsonify(responseDict);
+
+@app.route("/get_all_workers", methods=['GET', 'POST'])
+def get_all_workers():
+    for worker in task_router.workers(workspace_sid).list():
+        print(worker.friendly_name + "\n")
+    resp = Response("{}", status=200, mimetype='application/json')
+    return resp
 
 @app.route("/twilio_callback", methods=['GET', 'POST'])
 def twilio_callback():

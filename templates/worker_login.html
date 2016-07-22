@@ -73,7 +73,7 @@
       var user = $("#inputEmail").val();
       var pass = $("#inputPassword").val();
 
-      httpGetAsync("https://one-route.herokuapp.com/get_worker_sid?user=" + user + "&pass=" + pass, theCallback);
+      httpGetAsync("https://one-route.herokuapp.com/get_worker_details?user=" + user + "&pass=" + pass, theCallback);
     }
 
     function theCallback(responseText) {
