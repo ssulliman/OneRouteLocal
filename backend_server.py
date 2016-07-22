@@ -32,8 +32,8 @@ task_router = TwilioTaskRouterClient(account_sid, auth_token)
 # Define Flask routes
 @app.route("/get_worker_sid", methods=['GET', 'POST'])
 def get_worker_sid():
-    username = request.args.get('user')
-    password = request.args.get('pass')
+    username = str(request.args.get('user'))
+    password = str(request.args.get('pass'))
     print "LOG IN REQUEST FOR:  " + username + " with PW: " + password
     cursor = db.workers.find({"username": + "\"" + username + "\"","password": + "\"" + password + "\""})
     for doc in cursor:
