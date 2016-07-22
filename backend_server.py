@@ -10,6 +10,7 @@ from bson import json_util
 # Flask import
 from flask import Flask, flash, Response, jsonify, request, render_template
 app = Flask(__name__)
+app.secret_key = 'bc730ade0c837ba6c39e' # Random secret key
 
 # Mongo import and connection to OneRoute database
 from pymongo import MongoClient
