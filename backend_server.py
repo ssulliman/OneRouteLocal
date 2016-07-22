@@ -51,8 +51,6 @@ def get_worker_sid():
     worker = {}
     worker[username] = username
     worker[password] = password
-    print "LOG IN REQUEST FOR:  " + username + " with PW: " + password
-
 
     cursor_count = db.workers.find(worker).count()
 
@@ -64,7 +62,7 @@ def get_worker_sid():
             print json_dict["worker_sid"]
             print json_dict["worker_token"]
     else:
-        print "Got 0 results from mongodb - check connection +++++++++++++++++++"
+        print "Got 0 results from mongodb - check connection or db content +++++++++++++++++++"
 
     resp = Response("{}", status=200, mimetype='application/json')
     return resp;

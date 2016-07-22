@@ -70,16 +70,14 @@
 
   <script>
     function logUserIn() {
-      //TODO - make request to our backend API to "get_worker_sid" based on username/pw
-      //TODO - if worker_sid is retrieved, take user to their dashboard
       var user = $("#inputEmail").val();
       var pass = $("#inputPassword").val();
 
       console.log("https://one-route.herokuapp.com/get_worker_sid?user=" + user + "&pass=" + pass)
       httpGetAsync("https://one-route.herokuapp.com/get_worker_sid?user=" + user + "&pass=" + pass, theCallback);
 
-
-      return (user == "test@test.com" && pass == "test");
+      window.location = "worker_dashboard"
+      //return (user == "test@test.com" && pass == "test");
     }
 
     function theCallback() {
