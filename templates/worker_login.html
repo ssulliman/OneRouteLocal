@@ -79,8 +79,13 @@
     function theCallback(responseText) {
       console.log("Made it to the callback...");
       console.log("responseText:" + responseText)
-      responseDict = json.loads(responseText);
-      console.log("Worker sid: " + responseDict["worker_sid"])
+      var data = eval(responseText); // this will convert your json string to a javascript object
+
+      for (var key in data) {
+          if (data.hasOwnProperty(key)) { // this will check if key is owned by data object and not by any of it's ancestors
+              alert(key+': '+data[key]); // this will show each key with it's value
+          }
+}      console.log("Worker sid: " + data["worker_sid"])
 
       window.location.href = "https://one-route.herokuapp.com/worker_dashboard"
     }
