@@ -78,9 +78,8 @@
 
     function theCallback(responseText) {
       console.log("Made it to the callback...");
-      console.log("responseText:" + responseText)
-      alert(typeof responseText)
-      var data = eval(responseText); // this will convert your json string to a javascript object
+      console.log(responseText)
+      var data = JSON.parse(responseText); // this will convert your json string to a javascript object
 
       for (var key in data) {
           if (data.hasOwnProperty(key)) { // this will check if key is owned by data object and not by any of it's ancestors
