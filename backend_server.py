@@ -67,8 +67,8 @@ def get_worker_sid():
             print json_dict["worker_token"]
     else:
         print "Got 0 results from mongodb - check connection or db content +++++++++++++++++++"
-        responseDict["worker_sid"] = ""
-        responseDict["worker_token"] = ""
+        responseDict["worker_sid"] = "NONE"
+        responseDict["worker_token"] = "WTF?"
 
     print responseDict
     resp = Response(responseDict, status=200, mimetype='application/json')
