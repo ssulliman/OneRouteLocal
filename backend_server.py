@@ -108,7 +108,7 @@ def create_task():
 #        attributes='{"selected_language":"ru"}'
 #        )
     #print task.sid
-    resp = Response(jsonify(task_dict), status=200, mimetype='application/json')
+    resp = Response(jsonify(task_data), status=200, mimetype='application/json')
     return resp
 
 
