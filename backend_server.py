@@ -105,8 +105,9 @@ def create_task():
     print request
     print "request.data:" + request.data
     task_dict = json.loads(request.data)
-    print task_dict
     task_attributes = task_dict["task_attributes"]
+    print task_attributes
+
 
     task = task_router.tasks(workspace_sid).create(
         workflow_sid=workflow_sid,
