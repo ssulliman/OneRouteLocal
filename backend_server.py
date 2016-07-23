@@ -102,7 +102,7 @@ def assignment_callback():
 @app.route("/create_task", methods=['GET', 'POST'])
 def create_task():
     """Create a task with a given list of attributes"""
-    print "request" + request
+    print request
     print "request.data:" + request.data
     task_dict = json.loads(request.data)
     print "task_dict: " + task_dict
