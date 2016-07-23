@@ -109,7 +109,7 @@ def create_task():
 
     task = task_router.tasks(workspace_sid).create(
         workflow_sid=workflow_sid,
-        attributes=task_attributes
+        attributes=request.data
         )
     print task.sid
     resp = Response(jsonify(task_dict), status=200, mimetype='application/json')
