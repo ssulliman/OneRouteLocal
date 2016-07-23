@@ -81,7 +81,7 @@ def get_all_workers():
     return resp
 
 
-@app.route("/twilio_callback", methods=['GET', 'POST'])
+@app.route("/event_callback", methods=['GET', 'POST'])
 def twilio_callback():
     """Respond to ANY event within the Twilio workspace"""
     resp = Response("{}", status=200, mimetype='application/json')
@@ -91,7 +91,7 @@ def twilio_callback():
 @app.route("/assignment_callback", methods=['GET','POST'])
 def assignment_callback():
     """Respond to assignment callbacks with empty 200 response"""
-    
+
     # TODO - add/update task/event to mongodb
     print "MADE IT TO THE ASSIGNMENT_CALLBACK\n\n\n"
 
@@ -106,7 +106,6 @@ def create_task():
     print "request.data: " + request.data
     task_attributes = "{\"skills\":" + request.data + "}"
     print task_attributes
-
 
     task = task_router.tasks(workspace_sid).create(
         workflow_sid=workflow_sid,
