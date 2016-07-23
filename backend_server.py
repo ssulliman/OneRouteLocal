@@ -103,8 +103,8 @@ def assignment_callback():
 def create_task():
     """Create a task with a given list of attributes"""
     print request
-    print request.data
-    print request.json
+    print request.data + "^^^^^^^^^^^^^^^^^^^^^^^^^^^**"
+    #print request.json
     task_dict = json.loads(request.data)
     task_attributes = task_dict["task_attributes"]
 
