@@ -105,7 +105,7 @@ def create_task():
     print request
     print "request.data:" + request.data
     task_dict = json.loads(request.data)
-    task_attributes = task_dict["task_attributes"]
+    task_attributes = json.dump(task_dict["task_attributes"])
     print task_attributes
 
 
