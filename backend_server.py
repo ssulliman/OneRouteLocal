@@ -103,9 +103,9 @@ def assignment_callback():
 def create_task():
     """Create a task with a given list of attributes"""
     print request
-    print request.data + "^^^^^^^^^^^^^^^^^^^^^^^^^^^**"
-    #print request.json
+    print request.data
     task_dict = json.loads(request.data)
+    print task_dict
     task_attributes = task_dict["task_attributes"]
 
     task = task_router.tasks(workspace_sid).create(
