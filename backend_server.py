@@ -104,11 +104,13 @@ def create_task():
     """Create a task with a given list of attributes"""
     print request
     print "request.data: " + request.data
+    task_attributes = "{\"task_attributes\":" + request.data + "}"
+    print task_attributes
 
 
     task = task_router.tasks(workspace_sid).create(
         workflow_sid=workflow_sid,
-        attributes=request.data
+        attributes=task_attributes
         )
     print task.sid
     resp = Response(jsonify(task_dict), status=200, mimetype='application/json')
