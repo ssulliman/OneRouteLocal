@@ -104,7 +104,7 @@ def create_task():
     """Create a task with a given list of attributes"""
     print request
     print "request.data: " + request.data
-    task_attributes = "{\"task_attributes\":\"card\"}"
+    task_attributes = "{\"skills\":" + request.data + "}"
     print task_attributes
 
 
