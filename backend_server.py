@@ -51,6 +51,11 @@ def show_worker_dashboard():
         return render_template('worker_login.html')
 
 
+@app.route("/flash_invalid_login")
+def flash_worker_login():
+        flash('Permission denied: invalid username and password combination')
+        return render_template('worker_login.html')
+
 @app.route("/get_worker_details", methods=['GET', 'POST'])
 def get_worker_details():
     username = request.args.get('user')

@@ -63,19 +63,25 @@
         window.location.href = "https://one-route.herokuapp.com/worker_dashboard?worker_sid=" + worker_sid + "&worker_token=" + worker_token + "&worker_name=" + worker_name;
       }
       else {
-        alert("Incorrect username or password! Please try again.");
+        httpGetAsync("https://one-route.herokuapp.com/flash_invalid_login")
+//        alert("Incorrect username or password! Please try again.");
       }
     }
 
     function httpGetAsync(theUrl, callback)
     {
-        var xmlHttp = new XMLHttpRequest();
-        xmlHttp.onreadystatechange = function() { 
-            if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-                callback(xmlHttp.responseText);
+      callback = callback || null;
+
+      var xmlHttp = new XMLHttpRequest();
+      xmlHttp.onreadystatechange = function() { 
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+          if (callback != null) {
+            callback(xmlHttp.responseText);
+          }
         }
-        xmlHttp.open("GET", theUrl, true); // true for asynchronous 
-        xmlHttp.send(null);
+      }
+      xmlHttp.open("GET", theUrl, true); // true for asynchronous 
+      xmlHttp.send(null);
     }
   </script>
   </body>
