@@ -10,6 +10,7 @@ The app is hosted on Heroku at https://one-route.herokuapp.com/. The main page i
 - OneRouteDev@gmail.com
 - 1RouteDev
 
+### Now when you push to this repo using "git push" --> also push to Heroku for deployment using "git push heroku master"
 ---
 
 ###Our MongoDB instance can be accessed via web client at www.mLab.com and logging in with the following credentials:
@@ -17,6 +18,4 @@ The app is hosted on Heroku at https://one-route.herokuapp.com/. The main page i
 - OneRouteDev
 - 1RouteDev
 
----
 
-### Now when you push to this repo using "git push" --> also push to Heroku for deployment using "git push heroku master"
