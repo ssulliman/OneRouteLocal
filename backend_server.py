@@ -86,19 +86,18 @@ def get_all_workers():
     return resp
 
 
-@app.route("/event_callback", methods=['GET', 'POST'])
-def twilio_callback():
-    """Respond to ANY event within the Twilio workspace"""
-    resp = Response("{}", status=200, mimetype='application/json')
-    return resp
-
-
 @app.route("/assignment_callback", methods=['GET','POST'])
 def assignment_callback():
     """Respond to assignment callbacks with empty 200 response"""
 
     # TODO - add/update task/event to mongodb
     print "MADE IT TO THE ASSIGNMENT_CALLBACK\n\n\n"
+    task_sid = request.args.get('task_sid')
+    reservation_sid = request.args.get('reservation_sid')
+
+    reservation = client.reservations(workspace_sid, task_sid).update(reservation_sid, reservation_station='accepted')
+    print reservation.reservation_status
+    print reservation.worker_name
 
     resp = Response("{}", status=200, mimetype='application/json')
     return resp
