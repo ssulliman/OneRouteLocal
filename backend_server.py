@@ -92,14 +92,6 @@ def assignment_callback():
 
     # TODO - add/update task/event to mongodb
     print "MADE IT TO THE ASSIGNMENT_CALLBACK\n\n\n"
-    task_sid = request.args.get('task_sid')
-    reservation_sid = request.args.get('reservation_sid')
-    print "task_sid: " + task_sid
-    print "reservation_sid: " + reservation_sid
-
-    reservation = task_router.reservations(workspace_sid, task_sid).update(reservation_sid, reservation_station='accepted')
-    print reservation.reservation_status
-    print reservation.worker_name
 
     resp = Response("{instruction:accept}", status=200, mimetype='application/json')
     return resp
