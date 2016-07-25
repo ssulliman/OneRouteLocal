@@ -113,7 +113,10 @@ def create_task():
         attributes=request.data
         )
 
-    resp = Response("{}", status=200, mimetype='application/json')
+    responseDict = {}
+    responseDict["task_sid"] = task.sid
+
+    resp = Response(jsonify(responseDict), status=200, mimetype='application/json')
     return resp
 
 
