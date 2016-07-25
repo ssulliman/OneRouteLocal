@@ -116,8 +116,7 @@ def create_task():
     responseDict = {}
     responseDict["task_sid"] = task.sid
 
-    resp = Response(jsonify(responseDict), status=200, mimetype='application/json')
-    return resp
+    return jsonify(responseDict)
 
 
 @app.route("/accept_reservation", methods=['GET', 'POST'])
