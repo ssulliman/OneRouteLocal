@@ -93,9 +93,7 @@ def assignment_callback():
     # TODO - add/update task/event to mongodb
     print "MADE IT TO THE ASSIGNMENT_CALLBACK\n\n\n"
     accept_ret = {"instruction":"accept"}
-    #resp = Response("{instruction:accept}", status=200, mimetype='application/json')
     return jsonify(accept_ret)
-    #return resp
 
 
 @app.route("/create_task", methods=['GET', 'POST'])
