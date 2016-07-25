@@ -129,7 +129,7 @@ def accept_reservation(task_sid, reservation_sid):
     print reservation.reservation_status
     print reservation.worker_name
 
-    resp = Response('%s, %s'%(reservation.reservation_status, reservation.worker_name), status=200, mimetype='application/json')
+    resp = Response("{}", status=200, mimetype='application/json')
     return resp
 
 
