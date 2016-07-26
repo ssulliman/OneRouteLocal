@@ -87,7 +87,6 @@ def assignment_callback():
 
     # TODO - add/update task/event to mongodb
     print request
-    print "text:" + request.text
     print r.raw.read(10)
     print r.content
 
