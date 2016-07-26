@@ -30,7 +30,7 @@ def createWorkers():
 		    attributes=skills
 		)
 
-		print(twilio_worker.friendly_name)
+		print(twilio_worker.friendly_name + " was added to the workspace with the following attributes: " + skills)
 
 if __name__ == "__main__":
     main()
