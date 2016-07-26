@@ -88,7 +88,7 @@ def assignment_callback():
     # TODO - add/update task/event to mongodb
     print request
     print request.headers
-    print request.content
+    print vars(request)
 
 
     print "ACCEPTED TASK...\n\n"
