@@ -83,7 +83,7 @@ def get_worker_details():
 def assignment_callback():
     """Respond to assignment callbacks with empty 200 response"""
 
-    task_sid = request.data
+    task_sid = request.json
 
     # TODO - add/update task/event to mongodb
 
