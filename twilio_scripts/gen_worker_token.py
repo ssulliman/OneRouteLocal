@@ -14,9 +14,9 @@ parser.add_argument('worker_sid', help='<worker_sid>')
 args = parser.parse_args()
 
 #OneRoute Account Credentials
-account_sid = "AC18175a2369f4b32507c12549a8a6b44f"
-auth_token  = "edda94dfd34d1bf0c8e2d6cf789dd04f"
-workspace_sid = "WS43206b368788de2027c551fcf7264500"
+account_sid = "ACc9111e5c0efc0644b4e754bf2183c1c2"
+auth_token  = "86f3177a99d46d4cb6237b106be7bd9c"
+workspace_sid = "WSa521ebd8b208fe727465ceb9c92bfc52"
 worker_sid = args.worker_sid
 
 capability = TaskRouterWorkerCapability(account_sid, auth_token, workspace_sid, worker_sid)
