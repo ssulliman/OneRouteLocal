@@ -1,10 +1,6 @@
-#!/user/local/bin/python2.7
-
 import requests
 
-task_values="{\"skills\":\"[]\"}"
-
-task_attributes = {"task_attributes":task_values}
+task_attributes="{\"product\":\"card\",\"skills\":\"[\"disputes\"]\"}"
 
 result = requests.post("https://one-route.herokuapp.com/create_task", json=task_attributes)
 
