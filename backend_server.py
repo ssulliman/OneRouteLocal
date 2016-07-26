@@ -92,7 +92,8 @@ def assignment_callback():
     print "args: " + request.args
 
 
-    print "ACCEPTED TASK...\n\n\n"
+
+    print "ACCEPTED TASK...\n\n"
     accept_ret = {"instruction":"accept"}
     return jsonify(accept_ret)
 
