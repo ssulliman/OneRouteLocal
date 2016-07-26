@@ -83,12 +83,16 @@ def get_worker_details():
 def assignment_callback():
     """Respond to assignment callbacks with empty 200 response"""
 
-
+    
 
     # TODO - add/update task/event to mongodb
+    print "request: " + request
+    print "json:" + request.json
+    print "data: " + request.data
+    print "args: " + request.args
 
-    print "ACCEPTED TASK..." + request.args.get('task_sid') + "\n\n\n"
-    print request
+
+    print "ACCEPTED TASK...\n\n\n"
     accept_ret = {"instruction":"accept"}
     return jsonify(accept_ret)
 
