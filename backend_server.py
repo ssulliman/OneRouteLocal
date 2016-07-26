@@ -56,6 +56,7 @@ def flash_worker_login():
         flash('Permission denied: invalid username and password combination')
         return render_template('worker_login.html')
 
+
 @app.route("/get_worker_details", methods=['GET', 'POST'])
 def get_worker_details():
     username = request.args.get('user')
@@ -111,18 +112,18 @@ def create_task():
     return jsonify(responseDict)
 
 
-@app.route("/accept_reservation", methods=['GET', 'POST'])
-def accept_reservation(task_sid, reservation_sid):
-    """Accept reservation"""
-    task_sid = request.args.get('task_sid')
-    reservation_sid = request.args.get('reservation_sid')
+# @app.route("/accept_reservation", methods=['GET', 'POST'])
+# def accept_reservation(task_sid, reservation_sid):
+#     """Accept reservation"""
+#     task_sid = request.args.get('task_sid')
+#     reservation_sid = request.args.get('reservation_sid')
 
-    reservation = task_router.reservations(workspace_sid, task_sid).update(reservation_sid, reservation_station='accepted')
-    print reservation.reservation_status
-    print reservation.worker_name
+#     reservation = task_router.reservations(workspace_sid, task_sid).update(reservation_sid, reservation_station='accepted')
+#     print reservation.reservation_status
+#     print reservation.worker_name
 
-    resp = Response("{}", status=200, mimetype='application/json')
-    return resp
+#     resp = Response("{}", status=200, mimetype='application/json')
+#     return resp
 
 
 if __name__ == "__main__":
