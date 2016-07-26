@@ -79,20 +79,13 @@ def get_worker_details():
     return jsonify(responseDict);
 
 
-@app.route("/get_all_workers", methods=['GET', 'POST'])
-def get_all_workers():
-    for worker in task_router.workers(workspace_sid).list():
-        print(worker.friendly_name + "\n")
-    resp = Response("{}", status=200, mimetype='application/json')
-    return resp
-
-
 @app.route("/assignment_callback", methods=['GET','POST'])
 def assignment_callback():
     """Respond to assignment callbacks with empty 200 response"""
 
     # TODO - add/update task/event to mongodb
-    print "MADE IT TO THE ASSIGNMENT_CALLBACK\n\n\n"
+
+    print "ACCEPTED TASK...\n\n\n"
     accept_ret = {"instruction":"accept"}
     return jsonify(accept_ret)
 
@@ -110,20 +103,6 @@ def create_task():
     responseDict["task_sid"] = task.sid
 
     return jsonify(responseDict)
-
-
-# @app.route("/accept_reservation", methods=['GET', 'POST'])
-# def accept_reservation(task_sid, reservation_sid):
-#     """Accept reservation"""
-#     task_sid = request.args.get('task_sid')
-#     reservation_sid = request.args.get('reservation_sid')
-
-#     reservation = task_router.reservations(workspace_sid, task_sid).update(reservation_sid, reservation_station='accepted')
-#     print reservation.reservation_status
-#     print reservation.worker_name
-
-#     resp = Response("{}", status=200, mimetype='application/json')
-#     return resp
 
 
 if __name__ == "__main__":
