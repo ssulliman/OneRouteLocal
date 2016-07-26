@@ -87,8 +87,8 @@ def assignment_callback():
 
     # TODO - add/update task/event to mongodb
 
-    print "ACCEPTED TASK..." + request.args.get('task_sid') + "\n\n\n"
     print request
+    print "ACCEPTED TASK..." + #request.args.get('task_sid') + "\n\n\n"
     accept_ret = {"instruction":"accept"}
     return jsonify(accept_ret)
 
