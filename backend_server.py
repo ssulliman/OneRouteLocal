@@ -82,18 +82,8 @@ def get_worker_details():
 @app.route("/assignment_callback", methods=['GET','POST'])
 def assignment_callback():
     """Respond to assignment callbacks with empty 200 response"""
-
-    
-
-    # TODO - add/update task/event to mongodb
-    print request
-    print request.headers
-    print vars(request)
-
-
-    print "ACCEPTED TASK...\n\n"
-    accept_ret = {"instruction":"accept"}
-    return jsonify(accept_ret)
+    print "Accepted task...\n\n"
+    return jsonify({"instruction":"accept"})
 
 
 @app.route("/create_task", methods=['GET', 'POST'])
@@ -107,6 +97,8 @@ def create_task():
 
     responseDict = {}
     responseDict["task_sid"] = task.sid
+    # TODO - add/update task/event to mongodb
+
 
     return jsonify(responseDict)
 
