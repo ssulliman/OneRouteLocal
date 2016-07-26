@@ -63,8 +63,7 @@
         window.location.href = "https://one-route.herokuapp.com/worker_dashboard?worker_sid=" + worker_sid + "&worker_token=" + worker_token + "&worker_name=" + worker_name;
       }
       else {
-        //httpGetAsync("https://one-route.herokuapp.com/flash_invalid_login")
-        alert("Incorrect username or password! Please try again.");
+        window.location.href = "https://one-route.herokuapp.com/flash_invalid_login"
       }
     }
 
