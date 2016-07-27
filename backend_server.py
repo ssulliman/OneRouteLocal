@@ -79,12 +79,6 @@ def get_worker_details():
 
     return jsonify(responseDict);
 
-@app.route("/event_callback", methods=['GET','POST'])
-def event_callback():
-    print request.json
-    return
-
-
 # =========== Twilio Routes ===========
 @app.route("/event_callback", methods=['GET','POST'])
 def event_callback():
@@ -108,7 +102,7 @@ def create_task():
         workflow_sid=workflow_sid,
         attributes=request.data
         )
-		
+
     return jsonify({"task_sid":task.sid})
 
 
