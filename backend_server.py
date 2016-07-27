@@ -84,7 +84,7 @@ def get_worker_details():
 @app.route("/event_callback", methods=['GET','POST'])
 def event_callback():
     """Respond to events"""
-	print vars(request)
+    print vars(request)
 
 
 @app.route("/assignment_callback", methods=['GET','POST'])
