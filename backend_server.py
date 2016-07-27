@@ -103,7 +103,7 @@ def create_task():
         attributes=request.data
         )
 		
-    return jsonify({"task_sid":task_sid})
+    return jsonify({"task_sid":task.task_sid})
 
 
 if __name__ == "__main__":
