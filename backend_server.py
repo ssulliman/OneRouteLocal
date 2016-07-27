@@ -24,7 +24,7 @@ db = mongo_client.one_route
 # Twilio import
 from twilio.rest import TwilioTaskRouterClient, TwilioRestClient
 from twilio.rest.exceptions import TwilioRestException
-from werkzeug.datastructures import ImmutableMultiDict
+
 # Twilio account details
 account_sid = "ACc9111e5c0efc0644b4e754bf2183c1c2"
 auth_token  = "86f3177a99d46d4cb6237b106be7bd9c"
@@ -82,14 +82,15 @@ def get_worker_details():
 # =========== Twilio Routes ===========
 @app.route("/event_callback", methods=['GET','POST'])
 def event_callback():
+    #TODO-start storing the json events we want into Mlab
     """Respond to events"""
     print vars(request)
     print "Json : %s" % (request.json)
     form_dict = request.form
-    print "%s:%s" % ("EventType",form_dict["EventType"])
     print form_dict
     #Switch on EventType for Task Events
     if(form_dict["EventType"] == "task.created"):
+
         print "Task Sid: %s" %(form_dict["TaskSid"])
         print "Task Attributes: %s" % (form_dict["TaskAttributes"])
         print "Task Age: %s" %(form_dict["TaskAge"])
@@ -125,17 +126,17 @@ def event_callback():
 
     #Switch on EventType for Reservation Events
     elif(form_dict["EventType"] == "reservation.created"):
-        print "Task Cancelled"
+        print "Reservation is Created"
     elif(form_dict["EventType"] == "reservation.accepted"):
-        print "Task Cancelled"
+        print "Reservation is accepted"
     elif(form_dict["EventType"] == "reservation.rejected"):
-        print "Task Cancelled"
+        print "Reservation is Rejected"
     elif(form_dict["EventType"] == "reservation.timeout"):
-        print "Task Cancelled"
+        print "Reservation is timed out"
     elif(form_dict["EventType"] == "reservation.cancelled"):
-        print "Task Cancelled"
+        print "Reservation is Cancelled"
     elif(form_dict["EventType"] == "reservation.rescinded"):
-        print "Task Cancelled"
+        print "Reservation is Rescinded"
 
     #Switch on EventType for TaskQueue Events
     elif(form_dict["EventType"] == "task-queue.entered"):
@@ -143,7 +144,7 @@ def event_callback():
     elif(form_dict["EventType"] == "task-queue.timeout"):
         print "Task timed out in this TaskQueue"
     elif(form_dict["EventType"] == "task-queue.moved"):
-        print "Task moved into a differents TaskQueue"
+        print "Task moved into a different TaskQueue"
 
     #Switch on EventType for Workflow Events
     elif(form_dict["EventType"] == "workflow.timeout"):
