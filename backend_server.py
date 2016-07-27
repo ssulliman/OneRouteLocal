@@ -24,7 +24,7 @@ db = mongo_client.one_route
 # Twilio import
 from twilio.rest import TwilioTaskRouterClient, TwilioRestClient
 from twilio.rest.exceptions import TwilioRestException
-
+from werkzeug.datastructures import ImmutableMultiDict
 # Twilio account details
 account_sid = "ACc9111e5c0efc0644b4e754bf2183c1c2"
 auth_token  = "86f3177a99d46d4cb6237b106be7bd9c"
@@ -85,7 +85,10 @@ def event_callback():
     """Respond to events"""
     print vars(request)
     print "Json : %s" % (request.json)
-    print request.form
+    form_dict = request.form
+    for field in form_dict:
+        print field
+
     return Response("{}", status=200, mimetype='application/json')
 
 
@@ -93,6 +96,7 @@ def event_callback():
 def assignment_callback():
     """Respond to assignment callbacks with empty 200 response"""
     print "Accepted task...\n\n"
+    print request.form
     return jsonify({"instruction":"accept"})
 
 
