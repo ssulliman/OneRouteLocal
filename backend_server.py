@@ -87,8 +87,70 @@ def event_callback():
     print "Json : %s" % (request.json)
     form_dict = request.form
     print "%s:%s" % ("EventType",form_dict["EventType"])
-    for field in form_dict:
-        print form_dict[field]
+    print form_dict
+    #Switch on EventType for Task Events
+    if(form_dict["EventType"] == "task.created"):
+        print "Task Sid: %s" %(form_dict["TaskSid"])
+        print "Task Attributes: %s" % (form_dict["TaskAttributes"])
+        print "Task Age: %s" %(form_dict["TaskAge"])
+        print "Task Status: %s" %(form_dict["TaskAssignmentStatus"])
+        print "Task Creation"
+
+    elif(form_dict["EventType"] == "task.cancelled"):
+        print "Task Sid: %s" %(form_dict["TaskSid"])
+        print "Task Attributes: %s" % (form_dict["TaskAttributes"])
+        print "Task Age: %s" %(form_dict["TaskAge"])
+        print "Task Status: %s" %(form_dict["TaskAssignmentStatus"])
+        print "Task Cancelled"
+
+    elif(form_dict["EventType"] == "task.completed"):
+        print "Task Sid: %s" %(form_dict["TaskSid"])
+        print "Task Attributes: %s" % (form_dict["TaskAttributes"])
+        print "Task Age: %s" %(form_dict["TaskAge"])
+        print "Task Status: %s" %(form_dict["TaskAssignmentStatus"])
+        print "Task Completed"
+
+    elif(form_dict["EventType"] == "task.deleted"):
+        print "Task Sid: %s" %(form_dict["TaskSid"])
+        print "Task Attributes: %s" % (form_dict["TaskAttributes"])
+        print "Task Age: %s" %(form_dict["TaskAge"])
+        print "Task Status: %s" %(form_dict["TaskAssignmentStatus"])
+        print "Task Deleted"
+
+    #Switch on EventType for Worker Event
+    elif(form_dict["EventType"] == "worker.activity.update"):
+        print "Worker activity Update"
+    elif(form_dict["EventType"] == "worker.attributes.update"):
+        print "Worker Attributes Update"
+
+    #Switch on EventType for Reservation Events
+    elif(form_dict["EventType"] == "reservation.created"):
+        print "Task Cancelled"
+    elif(form_dict["EventType"] == "reservation.accepted"):
+        print "Task Cancelled"
+    elif(form_dict["EventType"] == "reservation.rejected"):
+        print "Task Cancelled"
+    elif(form_dict["EventType"] == "reservation.timeout"):
+        print "Task Cancelled"
+    elif(form_dict["EventType"] == "reservation.cancelled"):
+        print "Task Cancelled"
+    elif(form_dict["EventType"] == "reservation.rescinded"):
+        print "Task Cancelled"
+
+    #Switch on EventType for TaskQueue Events
+    elif(form_dict["EventType"] == "task-queue.entered"):
+        print "Task entered TaskQueue"
+    elif(form_dict["EventType"] == "task-queue.timeout"):
+        print "Task timed out in this TaskQueue"
+    elif(form_dict["EventType"] == "task-queue.moved"):
+        print "Task moved into a differents TaskQueue"
+
+    #Switch on EventType for Workflow Events
+    elif(form_dict["EventType"] == "workflow.timeout"):
+        print "Task has timed out in this workflow"
+    elif(form_dict["EventType"] == "workflow.entered"):
+        print "Task has entered into this workflow"
+
 
     return Response("{}", status=200, mimetype='application/json')
 
