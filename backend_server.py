@@ -85,6 +85,7 @@ def get_worker_details():
 def event_callback():
     """Respond to events"""
     print vars(request)
+    return Response("{}", status=200, mimetype='application/json')
 
 
 @app.route("/assignment_callback", methods=['GET','POST'])
