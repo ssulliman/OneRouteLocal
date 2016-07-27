@@ -85,7 +85,6 @@ def event_callback():
     """Respond to events"""
     print vars(request)
     print request.json
-    print request["werkzeug.request"]
     return Response("{}", status=200, mimetype='application/json')
 
 
