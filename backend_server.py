@@ -78,6 +78,11 @@ def get_worker_details():
 
     return jsonify(responseDict);
 
+@app.route("/event_callback", methods=['GET','POST'])
+def event_callback():
+    print request.json
+    return
+
 
 @app.route("/assignment_callback", methods=['GET','POST'])
 def assignment_callback():
