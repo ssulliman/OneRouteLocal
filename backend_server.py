@@ -86,8 +86,9 @@ def event_callback():
     print vars(request)
     print "Json : %s" % (request.json)
     form_dict = request.form
+    print "%s:%s" % ("EventType",form_dict["EventType"])
     for field in form_dict:
-        print field
+        print form_dict[field]
 
     return Response("{}", status=200, mimetype='application/json')
 
