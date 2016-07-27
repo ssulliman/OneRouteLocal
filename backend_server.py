@@ -35,6 +35,7 @@ workflow_sid = "WW23312adca9ce4cf87cc3488c1b6dde5d"
 task_router = TwilioTaskRouterClient(account_sid, auth_token)
 
 # Define Flask routes
+# =========== HTML Routes ===========
 @app.route("/")
 def root():
     return render_template('worker_login.html')
@@ -79,6 +80,13 @@ def get_worker_details():
     return jsonify(responseDict);
 
 
+# =========== Twilio Routes ===========
+@app.route("/event_callback", methods=['GET','POST'])
+def event_callback():
+    """Respond to events"""
+	print vars(request)
+
+
 @app.route("/assignment_callback", methods=['GET','POST'])
 def assignment_callback():
     """Respond to assignment callbacks with empty 200 response"""
@@ -94,13 +102,8 @@ def create_task():
         workflow_sid=workflow_sid,
         attributes=request.data
         )
-
-    responseDict = {}
-    responseDict["task_sid"] = task.sid
-    # TODO - add/update task/event to mongodb
-
-
-    return jsonify(responseDict)
+		
+    return jsonify({"task_sid":task_sid})
 
 
 if __name__ == "__main__":
