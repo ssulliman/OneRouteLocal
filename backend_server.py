@@ -85,7 +85,7 @@ def event_callback():
     """Respond to events"""
     print vars(request)
     print "Json : %s" % (request.json)
-
+    print request.form
     return Response("{}", status=200, mimetype='application/json')
 
 
