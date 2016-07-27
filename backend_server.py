@@ -84,7 +84,6 @@ def get_worker_details():
 def event_callback():
     """Respond to events"""
     print vars(request)
-    print "Status = %s" % (request.status_code)
     print "Json : %s" % (request.json)
 
     return Response("{}", status=200, mimetype='application/json')
