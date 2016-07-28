@@ -120,8 +120,13 @@ def event_callback():
         print "Task Status: %s" %(form_dict["TaskAssignmentStatus"])
         print "Task Completed"
 
+    elif(form_dict["EventType"] == "task.updated"):
+        task_cursor = db.tasks.update_on({"task_sid": form_dict["TaskSid"]}, {"task_assignment_status": form_dict["TaskAssignmentStatus"], "task_reason": "None")
+        return
+
     elif(form_dict["EventType"] == "task.deleted"):
-        #TODO-Find task and update the deletionx
+        #TODO-Find task and update the deletion
+        db.tasks.update_on({"task_sid": form_dict["TaskSid"]}, {"task_assignment_status": form_dict["TaskAssignmentStatus"], "task_reason": form_dict["TaskDeletedReason"]})
         print "Task Sid: %s" %(form_dict["TaskSid"])
         print "Task Attributes: %s" % (form_dict["TaskAttributes"])
         print "Task Age: %s" %(form_dict["TaskAge"])
