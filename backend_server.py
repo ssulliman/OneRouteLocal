@@ -82,15 +82,20 @@ def get_worker_details():
 # =========== Twilio Routes ===========
 @app.route("/event_callback", methods=['GET','POST'])
 def event_callback():
-    #TODO-start storing the json events we want into Mlab
     """Respond to events"""
     print vars(request)
     print "Json : %s" % (request.json)
     form_dict = request.form
     print form_dict
+
+    #TODO-start storing the json events we want into Mlab
+    #TODO-Figure out how to create Mongo DB
+
+
     #Switch on EventType for Task Events
     if(form_dict["EventType"] == "task.created"):
-
+        task_dict = {"task_sid":form_dict["TaskSid"], "task_attributes":form_dict["TaskAttributes"], "task_age":form_dict["TaskAge"], "task_assigment_status":form_dict["TaskAssignmentStatus"], "task_reason":"None" }
+        db.tasks.insert(task_dict)
         print "Task Sid: %s" %(form_dict["TaskSid"])
         print "Task Attributes: %s" % (form_dict["TaskAttributes"])
         print "Task Age: %s" %(form_dict["TaskAge"])
@@ -98,6 +103,8 @@ def event_callback():
         print "Task Creation"
 
     elif(form_dict["EventType"] == "task.cancelled"):
+        #TODO-Find the task and update it to cancelled and give the reason why it was cancelled
+        task_cursor = db.tasks.update_on({"task_sid": form_dict["TaskSid"]}, {"task_assignment_status": form_dict["TaskAssignmentStatus"], "task_reason": form_dict["TaskCancelledReason"]})
         print "Task Sid: %s" %(form_dict["TaskSid"])
         print "Task Attributes: %s" % (form_dict["TaskAttributes"])
         print "Task Age: %s" %(form_dict["TaskAge"])
@@ -105,6 +112,8 @@ def event_callback():
         print "Task Cancelled"
 
     elif(form_dict["EventType"] == "task.completed"):
+        #TODO-Find the task in Mongo and update to Completed
+        task_cursor = db.tasks.update_on({"task_sid": form_dict["TaskSid"]}, {"task_assignment_status": form_dict["TaskAssignmentStatus"], "task_reason": form_dict["TaskCompletedReason"]})
         print "Task Sid: %s" %(form_dict["TaskSid"])
         print "Task Attributes: %s" % (form_dict["TaskAttributes"])
         print "Task Age: %s" %(form_dict["TaskAge"])
@@ -112,6 +121,7 @@ def event_callback():
         print "Task Completed"
 
     elif(form_dict["EventType"] == "task.deleted"):
+        #TODO-Find task and update the deletionx
         print "Task Sid: %s" %(form_dict["TaskSid"])
         print "Task Attributes: %s" % (form_dict["TaskAttributes"])
         print "Task Age: %s" %(form_dict["TaskAge"])
