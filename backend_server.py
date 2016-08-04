@@ -37,6 +37,9 @@ workflow_sid = "WW23312adca9ce4cf87cc3488c1b6dde5d"
 # Get our TaskRouter object
 task_router = TwilioTaskRouterClient(account_sid, auth_token)
 
+#Twilio Voice Client
+voice_client = TwilioRestClient(account_sid, auth_token)
+
 # Define Flask routes
 # =========== HTML Routes ===========
 @app.route("/")
@@ -147,7 +150,7 @@ def event_callback():
     elif(form_dict["EventType"] == "reservation.accepted"):
         #TODO-When the reservation is accepted make a call to a user[]
         print "Making a call to a phone number"
-        task_router.calls.create(to="+14083100604", from="+14082146768")
+        voice_client.calls.create(url="http://demo.twilio.com/docs/voice.xml",to="+14083100604", from="+14082146768")
         print(call.sid)
         print form_dict
 
