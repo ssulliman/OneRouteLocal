@@ -145,8 +145,12 @@ def event_callback():
     elif(form_dict["EventType"] == "reservation.created"):
         print "Reservation is Created"
     elif(form_dict["EventType"] == "reservation.accepted"):
-        #TODO-When the reservation
+        #TODO-When the reservation is accepted make a call to a user[]
+        print "Making a call to a phone number"
+        task_router.calls.create(to="+14083100604", from="+14082146768")
+        print(call.sid)
         print form_dict
+
         print "Reservation is accepted"
     elif(form_dict["EventType"] == "reservation.rejected"):
         print "Reservation is Rejected"
