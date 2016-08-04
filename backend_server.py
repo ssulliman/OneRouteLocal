@@ -156,20 +156,20 @@ def event_callback():
     elif(form_dict["EventType"] == "task-queue.entered"):
         taskqueue_sid = form_dict["TaskQueueSid"]
         statistics = task_router.task_queues(workspace_sid).get(taskqueue_sid).statistics.get()
-        print "Form: %s" % (form_dict)
-        print "statistics: %s" % (statistics)
+        print form_dict
+        print statistics
         print "Task entered TaskQueue"
     elif(form_dict["EventType"] == "task-queue.timeout"):
         taskqueue_sid = form_dict["TaskQueueSid"]
         statistics = task_router.task_queues(workspace_sid).get(taskqueue_sid).statistics.get()
-        print "Form: %s" % (form_dict)
-        print "statistics: %s" % (statistics)
+        print form_dict
+        print statistics
         print "Task timed out in this TaskQueue"
     elif(form_dict["EventType"] == "task-queue.moved"):
         taskqueue_sid = form_dict["TaskQueueSid"]
         statistics = task_router.task_queues(workspace_sid).get(taskqueue_sid).statistics.get()
-        print "Form: %s" % (form_dict)
-        print "statistics: %s" % (statistics)
+        print form_dict
+        print statistics
         print "Task moved into a different TaskQueue"
 
     #Switch on EventType for Workflow Events
