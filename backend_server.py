@@ -7,6 +7,9 @@ from os import environ
 import json
 from bson import json_util
 
+#Import Logger
+import logging
+
 # Flask import
 from flask import Flask, flash, Response, jsonify, request, render_template
 app = Flask(__name__)
@@ -142,6 +145,8 @@ def event_callback():
     elif(form_dict["EventType"] == "reservation.created"):
         print "Reservation is Created"
     elif(form_dict["EventType"] == "reservation.accepted"):
+        #TODO-When the reservation
+        print form_dict
         print "Reservation is accepted"
     elif(form_dict["EventType"] == "reservation.rejected"):
         print "Reservation is Rejected"
@@ -156,21 +161,20 @@ def event_callback():
     elif(form_dict["EventType"] == "task-queue.entered"):
         print "Task entered TaskQueue"
         taskqueue_sid = form_dict["TaskQueueSid"]
-        statistics = task_router.task_queues(workspace_sid).get(taskqueue_sid).statistics.get()
+        #statistics = task_router.task_queues(workspace_sid).get(taskqueue_sid).statistics.get()
         print form_dict
-        print statistics
+
     elif(form_dict["EventType"] == "task-queue.timeout"):
         print "Task timed out in this TaskQueue"
         taskqueue_sid = form_dict["TaskQueueSid"]
-        statistics = task_router.task_queues(workspace_sid).get(taskqueue_sid).statistics.get()
+        #statistics = task_router.task_queues(workspace_sid).get(taskqueue_sid).statistics.get()
         print form_dict
-        print statistics
+
     elif(form_dict["EventType"] == "task-queue.moved"):
         print "Task moved into a different TaskQueue"
         taskqueue_sid = form_dict["TaskQueueSid"]
-        statistics = task_router.task_queues(workspace_sid).get(taskqueue_sid).statistics.get()
+        #statistics = task_router.task_queues(workspace_sid).get(taskqueue_sid).statistics.get()
         print form_dict
-        print statistics
 
     #Switch on EventType for Workflow Events
     elif(form_dict["EventType"] == "workflow.timeout"):
