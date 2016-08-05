@@ -89,14 +89,10 @@ def get_worker_details():
 @app.route("/event_callback", methods=['GET','POST'])
 def event_callback():
     """Respond to events"""
-    print vars(request)
-    print "Json : %s" % (request.json)
     form_dict = request.form
-    print form_dict
 
-    #TODO-start storing the json events we want into Mlab
-    #TODO-Figure out how to create Mongo DB
-
+    #TODO-Create Accept Call function that accepts the call to the phone number provided by the worker
+    #TODO-Make Outgoing call to twilio number that mimics our flow
 
     #Switch on EventType for Task Events
     if(form_dict["EventType"] == "task.created"):
@@ -148,13 +144,15 @@ def event_callback():
     elif(form_dict["EventType"] == "reservation.created"):
         print "Reservation is Created"
     elif(form_dict["EventType"] == "reservation.accepted"):
-        #TODO-When the reservation is accepted make a call to a user[]
-        print "Making a call to a phone number"
-        call = voice_client.calls.create(url="http://demo.twilio.com/docs/voice.xml", to="+14083100604", from_="+14082146768")
-        print(call.sid)
-        print form_dict
 
-        print "Reservation is accepted"
+        print "Making a call to a phone number"
+        print "\nReservation is accepted"
+        task_sid = form_dict["TaskSid"]
+        task = client.tasks(workspace_sid).get(task_sid)
+        print task.attributes
+        #call = voice_client.calls.create(url="http://demo.twilio.com/docs/voice.xml", to="+14083100604", from_="+14082146768")
+        #print(call.sid)
+        
     elif(form_dict["EventType"] == "reservation.rejected"):
         print "Reservation is Rejected"
     elif(form_dict["EventType"] == "reservation.timeout"):
