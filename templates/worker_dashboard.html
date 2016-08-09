@@ -36,7 +36,7 @@ var workspace_sid = "WSa521ebd8b208fe727465ceb9c92bfc52"
 var worker_sid = get("worker_sid")
 var worker_token = get("worker_token")
 var worker_name = get("worker_name")
-var taskrouter_worker = new Twilio.TaskRouter.Worker(worker_token,TRUE)
+var taskrouter_worker = new Twilio.TaskRouter.Worker(worker_token,"TRUE")
 var activities_hash = {}
 
 activities_hash['Idle'] = {activitySid:"WA4a5d6980400c3748cc46d1e22493672c"}
