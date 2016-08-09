@@ -102,13 +102,13 @@ def get_worker_details():
 
     return jsonify(responseDict);
 
+
 # =========== Twilio Routes ===========
 @app.route("/event_callback", methods=['GET','POST'])
 def event_callback():
     """Respond to events"""
     form_dict = request.form
 
-    #TODO-Create Accept Call function that accepts the call to the phone number provided by the worker
     #TODO-Make Outgoing call to twilio number that mimics our flow
 
     #Switch on EventType for Task Events
@@ -164,13 +164,14 @@ def event_callback():
         print "Reservation is Created"
 
     elif(form_dict["EventType"] == "reservation.accepted"):
+        #TODO-Push accepted reservation to the corresponding worker with the TaskSID
         print "Making a call to a phone number"
         print "\nReservation is accepted"
         task_sid = form_dict["TaskSid"]
         task = task_router.tasks(workspace_sid).get(task_sid)
         print task.attributes
-        call = voice_client.calls.create(url="http://demo.twilio.com/docs/voice.xml", to=task.attributes["phone_number"], from_="+14082146768")
-        print(call.sid)
+        #call = voice_client.calls.create(url="http://demo.twilio.com/docs/voice.xml", to=task.attributes["phone_number"], from_="+14082146768")
+        #print(call.sid)
 
     elif(form_dict["EventType"] == "reservation.rejected"):
         print "Reservation is Rejected"
@@ -185,19 +186,19 @@ def event_callback():
     elif(form_dict["EventType"] == "task-queue.entered"):
         print "Task entered TaskQueue"
         taskqueue_sid = form_dict["TaskQueueSid"]
+        #TODO-Update Corresponding worker dashboard with the TaskQueue
         #statistics = task_router.task_queues(workspace_sid).get(taskqueue_sid).statistics.get()
         print form_dict
 
     elif(form_dict["EventType"] == "task-queue.timeout"):
         print "Task timed out in this TaskQueue"
         taskqueue_sid = form_dict["TaskQueueSid"]
-        #statistics = task_router.task_queues(workspace_sid).get(taskqueue_sid).statistics.get()
         print form_dict
 
     elif(form_dict["EventType"] == "task-queue.moved"):
+        #TODO-Update Corresponding Workers Dashboards based on the Movement
         print "Task moved into a different TaskQueue"
         taskqueue_sid = form_dict["TaskQueueSid"]
-        #statistics = task_router.task_queues(workspace_sid).get(taskqueue_sid).statistics.get()
         print form_dict
 
     #Switch on EventType for Workflow Events

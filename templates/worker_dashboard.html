@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="//media.twiliocdn.com/taskrouter/js/v1.6/taskrouter.min.js"></script>
 </head>
 
 <body>
@@ -34,6 +35,14 @@ var workspace_sid = "WSa521ebd8b208fe727465ceb9c92bfc52"
 var worker_sid = get("worker_sid")
 var worker_token = get("worker_token")
 var worker_name = get("worker_name")
+var taskrouter_worker = new Twilio.TaskRouter.Worker(worker_token,TRUE)
+var activities_hash = {}
+
+activities_hash['Idle'] = {activitySid:"WA4a5d6980400c3748cc46d1e22493672c"}
+activities_hash['Busy'] = {activitySid:"WAac64dc68111c82fcaf8b78ec815afde8"}
+activities_hash['Reserved'] = {activitySid:"WA736c2c738b74abb7783e56de6c81ca2f"}
+activities_hash['Offline'] = {activitySid:"WA78c2554801eddb4b8c19aa0fb6279364"}
+
 
 if(history.replaceState) history.replaceState({}, "", "/worker_dashboard.html");
 document.getElementById('welcome_name').innerHTML = worker_name;
@@ -42,14 +51,17 @@ var $jqValue = $('.jqValue');
 
 $('#active_btn').click(function () {
   $jqValue.text('Your current worker state:  Active');
+  taskrouter_worker.update(activities_hash['Idle'].activitySid)
 });
 
 $('#busy_btn').click(function () {
   $jqValue.text('Your current worker state:  Busy');
+
 });
 
 $('#idle_btn').click(function () {
   $jqValue.text('Your current worker state:  Idle');
+  taskrouter_worker.update(activities_hash['Idle'].activitySid)
 });
 
 $('#reserved_btn').click(function () {
@@ -59,4 +71,3 @@ $('#reserved_btn').click(function () {
 
 </body>
 </html>
-
