@@ -63,14 +63,7 @@ $('#busy_btn').click(function () {
 $('#idle_btn').click(function () {
   $jqValue.text('Your current worker state:  Idle');
   console.log(activities_hash['Idle'].activitySid)
-  taskrouter_worker.update(activities_hash['Idle'].activitySid, function(error, worker) {
-    if(error) {
-      console.log(error.code);
-      console.log(error.message);
-    } else {
-      console.log(worker.activity_name); // "Offline"
-    }
-  });
+  taskrouter_worker.update(activities_hash['Idle'])
 });
 
 
