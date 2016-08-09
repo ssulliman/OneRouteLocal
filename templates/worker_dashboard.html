@@ -6,21 +6,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/fav_icon.png') }}">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../static/css/worker_dashboard.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
   <script type="text/javascript" src="//media.twiliocdn.com/taskrouter/js/v1.6/taskrouter.min.js"></script>
 </head>
 
 <body>
+<div class = "row">
 <div class="container">
   <h1>Welcome, <span id="welcome_name"></span>!</h1><br><br>
-
+<div class = "col-md-6">
   <h2 class="jqValue">Your current worker state: Idle</h2><br>
   <button id="active_btn" type="button" class="btn btn-primary">Active</button><br>
   <button id="busy_btn" type="button" class="btn btn-primary">Busy</button><br>
   <button id="idle_btn" type="button" class="btn btn-primary">Idle</button><br>
   <button id="reserved_btn" type="button" class="btn btn-primary">Reserved</button>
-</div>
 
 
 <script>
@@ -44,8 +45,8 @@ activities_hash['Reserved'] = {activitySid:"WA736c2c738b74abb7783e56de6c81ca2f"}
 activities_hash['Offline'] = {activitySid:"WA78c2554801eddb4b8c19aa0fb6279364"}
 
 
-if(history.replaceState) history.replaceState({}, "", "/worker_dashboard.html");
-document.getElementById('welcome_name').innerHTML = worker_name;
+// if(history.replaceState) history.replaceState({}, "", "/worker_dashboard.html");
+// document.getElementById('welcome_name').innerHTML = worker_name;
 
 var $jqValue = $('.jqValue');
 
@@ -67,6 +68,37 @@ $('#idle_btn').click(function () {
 $('#reserved_btn').click(function () {
   $jqValue.text('Your current worker state:  Reserved');
 });
+
+
+</script>
+</div>
+<div class="col-md-6">
+  <h2>Tasks or something</h2>
+  <div class="row-centered">
+    <div class="col-md-12 tasks_box">
+      <div id ="task_cards">
+      </div>
+    </div>
+    </div>
+
+  </div>
+
+
+</div>
+</div>
+</div>
+
+<script>
+var populate_cards = document.getElementById("task_cards");
+var task_list = ["1sst element", "2nd element", "3rd elements", "4th element", "5 element", "Ross"];
+for(var i = 0; i< task_list.length; ++i){
+  var div_row = document.createElement("div");
+  div_row.className = "row card";
+  var p_details = document.createTextNode(task_list[i]);
+  div_row.appendChild(p_details);
+  populate_cards.appendChild(div_row);
+}
+
 </script>
 
 </body>
