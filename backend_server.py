@@ -7,26 +7,6 @@ from os import environ
 import json
 from bson import json_util
 
-#Import Logger
-import logging
-import logging
-
-logger = logging.getLogger(__name__)
-logger.setLevel(logging.INFO)
-
-handler = logging.FileHandler('event.log')
-handler.setLevel(logging.INFO)
-
-# create a logging format
-
-formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-handler.setFormatter(formatter)
-
-# add the handlers to the logger
-
-logger.addHandler(handler)
-
-
 # Flask import
 from flask import Flask, flash, Response, jsonify, request, render_template
 app = Flask(__name__)
