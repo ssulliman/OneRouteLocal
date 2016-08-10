@@ -110,7 +110,7 @@ def get_worker_reservation_list():
         worker_sid = json_dict["WorkerSid"]
         reservation_list = task_router.workers(workspace_sid).get(worker_sid).reservations.list()
         for i in range(len(reservation_list)):
-            reservation_map[i] = reservation
+            reservation_map[i] = reservation_list.index(i)
             print(reservation.reservation_status)
             print(reservation.worker_name)
 
