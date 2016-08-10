@@ -105,13 +105,16 @@ def change_worker_state():
 @app.route("/get_worker_reservation_list", methods=['GET', 'POST'])
 def get_worker_reservation_list():
     json_dict = request.json
+    reservation_map = {}
     if(len(json_dict["WorkerSid"]) > 0):
         worker_sid = json_dict["WorkerSid"]
         reservation_list = task_router.workers(workspace_sid).get(worker_sid).reservations.list()
-        for reservation in reservation_list:
+        for i in range(len(reservation_list)):
+            reservation_map[i] = reservation
             print(reservation.reservation_status)
             print(reservation.worker_name)
-        return jsonify(reservation_list)
+
+        return jsonify(reservation_map)
 
     else:
         print "Invalid Worker Id"
