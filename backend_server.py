@@ -96,7 +96,7 @@ def change_worker_state():
         worker_sid = json_dict["WorkerSid"]
         print "Worker State: %s, WorkerSid = %s, activitySid = %s" % (json_dict["state"], worker_sid, activity_sid)
         worker = task_router.workers(workspace_sid).get(worker_sid)
-        worker.update(activitySid=activity_sid)
+        worker.update(ActivitySid=activity_sid)
         return Response("{Changed Worker State}", status=200, mimetype='application/json')
     else:
         print "Activity State was not found in the system"
