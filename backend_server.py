@@ -93,7 +93,7 @@ def change_worker_state():
     json_dict = request.json
     if(json_dict["state"] in activity_sid_map):
         activity_sid = activity_sid_map[json_dict["state"]]
-        worker_sid = activity_sid_map["WorkerSid"]
+        worker_sid = json_dict["WorkerSid"]
         worker = task_router.workers(workspace_sid).get(worker_sid)
         worker.update(activitySid=activity_sid)
     else:
