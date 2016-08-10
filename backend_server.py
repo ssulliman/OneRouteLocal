@@ -82,6 +82,22 @@ def get_worker_details():
 
     return jsonify(responseDict);
 
+@app.route("/change_worker_state", methods=['GET', 'POST'])
+def change_worker_state():
+    activity_sid_map = {
+        "Idle":"WA4a5d6980400c3748cc46d1e22493672c",
+        "Busy":"WAac64dc68111c82fcaf8b78ec815afde8",
+        "Reserved":"WA736c2c738b74abb7783e56de6c81ca2f",
+        "Offline":"WA78c2554801eddb4b8c19aa0fb6279364"
+    }
+    json_dict = request.json
+    if(json_dict["state"] in activity_sid_map):
+        activity_sid = activity_sid_map[json_dict["state"]]
+        worker_sid = activity_sid_map["WorkerSid"]
+        worker = task_router.workers(workspace_sid).get(worker_sid)
+        worker.update(activitySid=activity_sid)
+    else:
+        print "Activity State was not found in the system"
 
 # =========== Twilio Routes ===========
 @app.route("/event_callback", methods=['GET','POST'])

@@ -23,6 +23,7 @@ capability = TaskRouterWorkerCapability(account_sid, auth_token, workspace_sid, 
 capability.allow_activity_updates()
 capability.allow_reservation_updates()
 
+
 # For example, to generate a token good for 1000 days:
 token = capability.generate_token(60 * 60 * 24 * 1000);
 
