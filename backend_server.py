@@ -91,7 +91,8 @@ def change_worker_state():
         "Offline":"WA78c2554801eddb4b8c19aa0fb6279364"
     }
     json_dict = request.json
-    if(json_dict["state"] in activity_sid_map):
+
+    if((json_dict["state"] in activity_sid_map) and (len(json_dict["WorkerSid"]) > 0)):
         activity_sid = activity_sid_map[json_dict["state"]]
         worker_sid = json_dict["WorkerSid"]
         print "Worker State: %s, WorkerSid = %s, activitySid = %s" % (json_dict["state"], worker_sid, activity_sid)
@@ -99,7 +100,21 @@ def change_worker_state():
         worker.update(ActivitySid=activity_sid)
         return Response("{Changed Worker State to  %s}", status=200, mimetype='application/json') % (json_dict["state"])
     else:
-        print "Activity State was not found in the system"
+        print "Activity State was not found in the system, or WorkerSid does not exist in Taskrouter check Request Again"
+
+@app.route("/get_worker_reservation_list", methods=['GET', 'POST'])
+def get_worker_reservation_list():
+    json_dict = request.json
+    if(len(json_dict["WorkerSid"]) > 0):
+        reservation_list = task_router.workers(workspace_sid).get(worker_sid).reservation.list()
+        for reservation in reservation_list:
+            print(reservation.reservation_status)
+            print(reservation.worker_name)
+        return jsonify(reservation_list)
+
+    else:
+        print "Invalid Worker Id"
+
 
 # =========== Twilio Routes ===========
 @app.route("/event_callback", methods=['GET','POST'])
