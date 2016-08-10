@@ -112,8 +112,9 @@ def get_worker_reservation_list():
         for i in range(len(reservation_list)):
             reservation_map[i] = reservation_list[i]
             print(reservation_list[i].worker_name)
-            print(reservation_list[i].reservation)
+            #print(reservation_list[i].reservation)
 
+        print jsonify(reservation_map)
         return jsonify(reservation_map)
 
     else:
