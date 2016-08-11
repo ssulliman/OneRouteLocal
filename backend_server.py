@@ -116,7 +116,7 @@ def get_worker_reservation_list():
             print(reservation_list[i].reservation_status)
 
         #print jsonify(reservation_map)
-        return jsonify(200)
+        return Response("{}", status=200, mimetype='application/json')
 
     else:
         print "Invalid Worker Id"
