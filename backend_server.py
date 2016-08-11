@@ -112,6 +112,7 @@ def get_worker_reservation_list():
         for i in range(len(reservation_list)):
             reservation_map[i] = reservation_list[i]
             print(reservation_list[i].attributes)
+            print(reservation_list[i].sid)
 
         #print jsonify(reservation_map)
         return Response("{}", status=200, mimetype='application/json')
