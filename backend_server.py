@@ -111,7 +111,7 @@ def get_worker_reservation_list():
         reservation_list = task_router.tasks(workspace_sid).list(TaskQueueName=taskqueue_name)
         for i in range(len(reservation_list)):
             reservation_map[i] = reservation_list[i]
-            print(reservation_list[i])
+            print(reservation_list[i].attributes)
 
         #print jsonify(reservation_map)
         return Response("{}", status=200, mimetype='application/json')
