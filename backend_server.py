@@ -109,6 +109,7 @@ def get_worker_reservation_list():
     if(len(json_dict["WorkerSid"]) > 0):
         worker_sid = json_dict["WorkerSid"]
         reservation_list = task_router.workers(workspace_sid).get(worker_sid).reservations.list()
+        print "Reservation_list funtionc"
         for i in range(len(reservation_list)):
             print len(reservation_list)
             reservation_map[i] = reservation_list[i]
