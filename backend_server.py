@@ -105,14 +105,14 @@ def change_worker_state():
 @app.route("/get_taskqueue_list", methods=['GET', 'POST'])
 def get_worker_reservation_list():
     json_dict = request.json
-    reservation_map = {}
+    task_assignment_map = {}
     if(len(json_dict["TaskQueueName"]) > 0):
         taskqueue_name = json_dict["TaskQueueName"]
-        reservation_list = task_router.tasks(workspace_sid).list(TaskQueueName=taskqueue_name)
-        for i in range(len(reservation_list)):
-            reservation_map[i] = reservation_list[i]
-            print(reservation_list[i].attributes)
-            print(reservation_list[i].sid)
+        task_list = task_router.tasks(workspace_sid).list(TaskQueueName=taskqueue_name)
+        for task in range(len(task_list)):
+            print task_list[i].attributes
+            #reservation_map[i] = task_list[i]
+
 
         #print jsonify(reservation_map)
         return Response("{}", status=200, mimetype='application/json')
