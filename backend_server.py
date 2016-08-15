@@ -113,13 +113,10 @@ def get_worker_reservation_list():
             print task_list[i].attributes
             task_assignment_map[i] = task_list[i].attributes
 
-
-
-        #print jsonify(reservation_map)
         return jsonify(task_assignment_map)
 
     else:
-        print "Invalid Worker Id"
+        print "TaskQueue Name is invalid"
 
 
 # =========== Twilio Routes ===========
