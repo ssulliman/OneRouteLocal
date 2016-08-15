@@ -109,7 +109,7 @@ def get_worker_reservation_list():
     if(len(json_dict["TaskQueueName"]) > 0):
         taskqueue_name = json_dict["TaskQueueName"]
         task_list = task_router.tasks(workspace_sid).list(TaskQueueName=taskqueue_name)
-        for task in range(len(task_list)):
+        for i in range(len(task_list)):
             print task_list[i].attributes
             #reservation_map[i] = task_list[i]
 
