@@ -111,11 +111,12 @@ def get_worker_reservation_list():
         task_list = task_router.tasks(workspace_sid).list(TaskQueueName=taskqueue_name)
         for i in range(len(task_list)):
             print task_list[i].attributes
-            #reservation_map[i] = task_list[i]
+            reservation_map[i] = task_list[i]
+
 
 
         #print jsonify(reservation_map)
-        return Response("{}", status=200, mimetype='application/json')
+        return jsonify(reservation_map)
 
     else:
         print "Invalid Worker Id"
