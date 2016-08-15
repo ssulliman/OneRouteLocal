@@ -111,7 +111,7 @@ def get_worker_reservation_list():
         task_list = task_router.tasks(workspace_sid).list(TaskQueueName=taskqueue_name)
         for i in range(len(task_list)):
             print task_list[i].attributes
-            task_assignment_map[i] = task_list[i]
+            task_assignment_map[i] = task_list[i].attributes
 
 
 
