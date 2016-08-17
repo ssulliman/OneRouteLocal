@@ -35,7 +35,7 @@ workflow_sid = "WW23312adca9ce4cf87cc3488c1b6dde5d"
 task_router = TwilioTaskRouterClient(account_sid, auth_token)
 
 #Twilio Voice Client
-voice_client = TwilioRestClient(account_sid, auth_token)
+twilio_client = TwilioRestClient(account_sid, auth_token)
 
 # Define Flask routes
 # =========== HTML Routes ===========
@@ -117,6 +117,14 @@ def get_worker_reservation_list():
 
     else:
         print "TaskQueue Name is invalid"
+
+@app.route("/make_call", methods=['POST'])
+def make_call():
+    json_dict = request.json
+    to_number = json_dict["to"]
+    from_number = json_dict["from"]
+    call = client.calls.create(url="http://demo.twilio.com/docs/voice.xml",to=to_number,from_=from_number)
+    print(call.sid)
 
 
 # =========== Twilio Routes ===========
