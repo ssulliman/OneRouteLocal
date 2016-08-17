@@ -44,7 +44,7 @@ def root():
     return render_template('worker_login.html')
 
 
-@app.route("/worker_dashboard")
+@app.route("/worker_dashboard.html")
 def show_worker_dashboard():
     friendly_name = request.args.get('worker_name')
     if (friendly_name):

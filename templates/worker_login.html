@@ -61,7 +61,7 @@
       var worker_name = responseData["worker_name"];
 
       if (worker_sid.length > 0 && worker_token.length > 0) {
-        window.location.href = "https://one-route.herokuapp.com/worker_dashboard?worker_sid=" + worker_sid + "&worker_token=" + worker_token + "&worker_name=" + worker_name;
+        window.location.href = "https://one-route.herokuapp.com/worker_dashboard.html?worker_sid=" + worker_sid + "&worker_token=" + worker_token + "&worker_name=" + worker_name;
       }
       else {
         window.location.href = "https://one-route.herokuapp.com/flash_invalid_login"
