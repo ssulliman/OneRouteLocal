@@ -161,7 +161,7 @@
   });
 
   $('#populate_tasks').click(function () {
-    $('#populate_tasks').text = "Getting tasks..."
+    document.getElementById('populate_tasks').text = "Getting tasks..."
     get_worker_tasks(worker_sid);
   });
 
