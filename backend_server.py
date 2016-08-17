@@ -3,6 +3,9 @@
 # Use to get port # from Heroku environment
 from os import environ
 
+# DB STUFF
+from flask.ext.sqlalchemy import SQLAlchemy
+
 # JSON import
 import json
 from bson import json_util
@@ -11,6 +14,10 @@ from bson import json_util
 from flask import Flask, flash, Response, jsonify, request, render_template
 app = Flask(__name__)
 app.secret_key = 'bc730ade0c837ba6c39e' # Random secret key
+
+# DB STUFF
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
+db = SQLAlchemy(app)
 
 # Mongo import and connection to OneRoute database
 from pymongo import MongoClient
