@@ -84,30 +84,18 @@
 
 
   function get_worker_tasks(task_queue_sid) {
-    httpGetAsync("https://one-route.herokuapp.com/get_worker_tasks?task_queue_sid=" + task_queue_sid, tasks_callback);
-  }
-
-  function task_queue_callback(responseText) {
-    console.log("Made it to the task_queue_callback...");
-    var responseData = JSON.parse(responseText);
-    var task_queue_list = responseData["TaskQueueList"];
-
-    if (task_queue_list.length > 0 && task_queue_list.length > 0) {
-      get_task_list();
-    }
+    httpGetAsync("https://one-route.herokuapp.com/get_worker_tasks?worker_sid=" + task_queue_sid, tasks_callback);
   }
 
   function tasks_callback(responseText) {
     console.log("Made it to the tasks_callback...");
     var responseData = JSON.parse(responseText);
-    var task_queue_list = responseData["TaskQueueList"];
+    var task_list = responseData["TaskList"];
 
     if (task_queue_list.length > 0 && task_queue_list.length > 0) {
-      get_task_list();
+      populate_task_list(task_list);
     }
   }
-
-
 
   function httpGetAsync(theUrl, callback)
   {
@@ -171,6 +159,7 @@
   });
 
   $('#populate_tasks').click(function () {
+    $('#populate_tasks').value = "Getting tasks..."
     get_worker_tasks(worker_sid);
   });
 
