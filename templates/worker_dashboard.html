@@ -92,8 +92,8 @@
 
 
   function get_worker_tasks(worker_sid) {
-    httpGetAsync("https://one-route.herokuapp.com/get_worker_tasks?worker_sid=" + worker_sid, tasks_callback);
     console.log(worker_sid)
+    httpGetAsync("https://one-route.herokuapp.com/get_worker_tasks?worker_sid=" + worker_sid, tasks_callback);
   }
 
   function tasks_callback(responseText) {
