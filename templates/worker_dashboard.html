@@ -67,6 +67,11 @@
          } );
   } );
 
+  function get(name){
+     if(name=(new RegExp('[?&]'+encodeURIComponent(name)+'=([^&]*)')).exec(location.search))
+        return decodeURIComponent(name[1]);
+  }
+
 
   var account_sid = "ACc9111e5c0efc0644b4e754bf2183c1c2"
   var auth_token  = "86f3177a99d46d4cb6237b106be7bd9c"
@@ -132,13 +137,6 @@
     }
   }
 
-
-
-
-  function get(name){
-     if(name=(new RegExp('[?&]'+encodeURIComponent(name)+'=([^&]*)')).exec(location.search))
-        return decodeURIComponent(name[1]);
-  }
 
 
   var $jqValue = $('.jqValue');
