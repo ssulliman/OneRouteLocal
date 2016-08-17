@@ -20,6 +20,14 @@
 <div class = "row">
   <div class="container">
     <h1>Welcome, <span id="welcome_name"></span>!</h1><br><br>
+    <div class = "col-md-6">
+      <h2 class="jqValue">Your current worker state: Idle</h2><br>
+      <button id="active_btn" type="button" class="btn btn-primary">Active</button><br>
+      <button id="busy_btn" type="button" class="btn btn-primary">Busy</button><br>
+      <button id="idle_btn" type="button" class="btn btn-primary">Idle</button><br>
+      <button id="reserved_btn" type="button" class="btn btn-primary">Reserved</button><br><br>
+      <button id="populate_tasks" type="button" class="btn btn-primary">Populate Tasks</button>
+    </div>
 
     <h2>Tasks waiting</h2>
 
@@ -43,30 +51,18 @@
             </tbody>
     </table>
 
-    <div class = "col-md-6">
-      <h2 class="jqValue">Your current worker state: Idle</h2><br>
-      <button id="active_btn" type="button" class="btn btn-primary">Active</button><br>
-      <button id="busy_btn" type="button" class="btn btn-primary">Busy</button><br>
-      <button id="idle_btn" type="button" class="btn btn-primary">Idle</button><br>
-      <button id="reserved_btn" type="button" class="btn btn-primary">Reserved</button>
-    </div>
-
   </div>
 </div>
 
 
 <script>
-  // Initialize data table and order by ELO
+  // Initialize data table and order by Task ID
   $(document).ready(function() {
       $('#tasks').DataTable( {
               "paging": false,
          } );
   } );
 
-  function get(name){
-     if(name=(new RegExp('[?&]'+encodeURIComponent(name)+'=([^&]*)')).exec(location.search))
-        return decodeURIComponent(name[1]);
-  }
 
   var account_sid = "ACc9111e5c0efc0644b4e754bf2183c1c2"
   var auth_token  = "86f3177a99d46d4cb6237b106be7bd9c"
@@ -81,8 +77,64 @@
   activities_hash['Offline'] = {activitySid:"WA78c2554801eddb4b8c19aa0fb6279364"}
 
 
-   if(history.replaceState) history.replaceState({}, "", "/worker_dashboard.html");
-   document.getElementById('welcome_name').innerHTML = worker_name;
+
+
+  if(history.replaceState) history.replaceState({}, "", "/worker_dashboard.html");
+  document.getElementById('welcome_name').innerHTML = worker_name;
+
+
+  function get_worker_tasks() {
+    httpGetAsync("https://one-route.herokuapp.com/get_worker_details?worker_sid=" + worker_sid, theCallback);
+  }
+
+  function theCallback(responseText) {
+    console.log("Made it to the callback...");
+    var responseData = JSON.parse(responseText);
+    var task_queue_list = responseData["TaskQueueList"];
+
+    if (worker_sid.length > 0 && worker_token.length > 0) {
+      populate_task_list(task_queue_list);
+    }
+  }
+
+  function httpGetAsync(theUrl, callback)
+  {
+      var xmlHttp = new XMLHttpRequest();
+      xmlHttp.onreadystatechange = function() { 
+          if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+              callback(xmlHttp.responseText);
+      }
+      xmlHttp.open("GET", theUrl, true); // true for asynchronous 
+      xmlHttp.send(null);
+  }
+
+  function populate_task_list(task_queue_list) {
+
+  }
+
+
+
+
+  var populate_cards = document.getElementById("tasks");
+  var task_list = []
+
+  for(var i = 0; i < task_list.length; ++i) {
+    var div_row = document.createElement("tr");
+    div_row.className = "task_item";
+
+    var p_details = document.createElement("td");
+    p_details.text = task_list[i];
+
+    div_row.appendChild(p_details);
+    populate_cards.appendChild(div_row);
+  }
+
+
+  function get(name){
+     if(name=(new RegExp('[?&]'+encodeURIComponent(name)+'=([^&]*)')).exec(location.search))
+        return decodeURIComponent(name[1]);
+  }
+
 
   var $jqValue = $('.jqValue');
 
@@ -98,11 +150,15 @@
 
   $('#idle_btn').click(function () {
     $jqValue.text('Your current worker state:  Idle');
-    taskrouter_worker.update(activities_hash['Idle'])
+    taskrouter_worker.update(activities_hash['Idle'].activitySid)
   });
 
   $('#reserved_btn').click(function () {
     $jqValue.text('Your current worker state:  Reserved');
+  });
+
+  $('#populate_tasks').click(function () {
+    $jqValue.text('Getting Tasks...');
   });
 
 </script>
