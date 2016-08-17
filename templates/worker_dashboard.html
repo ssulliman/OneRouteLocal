@@ -97,13 +97,13 @@
   }
 
   function tasks_callback(responseText) {
-    console.log("Made it to the tasks_callback...");
+    console.log("Made it to the tasks callback...");
     var responseData = JSON.parse(responseText);
-    var task_list = responseData["TaskList"];
+    // var task_list = responseData["TaskList"];
 
-    if (task_queue_list.length > 0 && task_queue_list.length > 0) {
-      populate_task_list(task_list);
-    }
+    // if (task_queue_list.length > 0 && task_queue_list.length > 0) {
+    //   populate_task_list(task_list);
+    // }
   }
 
   function httpGetAsync(theUrl, callback)
