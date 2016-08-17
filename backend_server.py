@@ -86,7 +86,7 @@ def get_worker_details():
 @app.route("/get_worker_tasks", methods=['GET', 'POST']) 
 def get_worker_task_queues(): 
     worker_sid = request.args.get('worker_sid')
-    worker = twilio_client.workers(workspace_sid).get(worker_sid)
+    worker = twilio_router.workers(workspace_sid).get(worker_sid)
     print worker.task
     responseDict = {}
 
