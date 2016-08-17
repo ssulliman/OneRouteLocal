@@ -60,7 +60,6 @@ def flash_worker_login():
         flash('Permission denied: invalid username and password combination')
         return render_template('worker_login.html')
 
-
 @app.route("/get_worker_details", methods=['GET', 'POST'])
 def get_worker_details():
     username = request.args.get('user')
@@ -81,6 +80,15 @@ def get_worker_details():
         responseDict["worker_token"] = ""
 
     return jsonify(responseDict);
+
+@app.route("/get_worker_tasks") 
+def get_worker_task_queues(): 
+    worker_sid = request.args.get('worker_sid')
+    responseDict = {}
+
+
+    return jsonify(responseDict);
+
 
 @app.route("/change_worker_state", methods=['GET', 'POST'])
 def change_worker_state():

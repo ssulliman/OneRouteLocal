@@ -76,26 +76,38 @@
   activities_hash['Reserved'] = {activitySid:"WA736c2c738b74abb7783e56de6c81ca2f"}
   activities_hash['Offline'] = {activitySid:"WA78c2554801eddb4b8c19aa0fb6279364"}
 
-
-
-
   if(history.replaceState) history.replaceState({}, "", "/worker_dashboard.html");
   document.getElementById('welcome_name').innerHTML = worker_name;
 
 
-  function get_worker_tasks() {
-    httpGetAsync("https://one-route.herokuapp.com/get_worker_details?worker_sid=" + worker_sid, theCallback);
+
+
+
+  function get_worker_tasks(task_queue_sid) {
+    httpGetAsync("https://one-route.herokuapp.com/get_worker_tasks?task_queue_sid=" + task_queue_sid, tasks_callback);
   }
 
-  function theCallback(responseText) {
-    console.log("Made it to the callback...");
+  function task_queue_callback(responseText) {
+    console.log("Made it to the task_queue_callback...");
     var responseData = JSON.parse(responseText);
     var task_queue_list = responseData["TaskQueueList"];
 
-    if (worker_sid.length > 0 && worker_token.length > 0) {
-      populate_task_list(task_queue_list);
+    if (task_queue_list.length > 0 && task_queue_list.length > 0) {
+      get_task_list();
     }
   }
+
+  function tasks_callback(responseText) {
+    console.log("Made it to the tasks_callback...");
+    var responseData = JSON.parse(responseText);
+    var task_queue_list = responseData["TaskQueueList"];
+
+    if (task_queue_list.length > 0 && task_queue_list.length > 0) {
+      get_task_list();
+    }
+  }
+
+
 
   function httpGetAsync(theUrl, callback)
   {
@@ -108,26 +120,27 @@
       xmlHttp.send(null);
   }
 
-  function populate_task_list(task_queue_list) {
 
+
+  function populate_task_list(task_list) {
+    for (task in task_list) {
+      var populate_cards = document.getElementById("tasks");
+      var task_list = []
+
+      for(var i = 0; i < task_list.length; ++i) {
+        var div_row = document.createElement("tr");
+        div_row.className = "task_item";
+
+        var p_details = document.createElement("td");
+        p_details.text = task_list[i];
+
+        div_row.appendChild(p_details);
+        populate_cards.appendChild(div_row);
+      }
+    }
   }
 
 
-
-
-  var populate_cards = document.getElementById("tasks");
-  var task_list = []
-
-  for(var i = 0; i < task_list.length; ++i) {
-    var div_row = document.createElement("tr");
-    div_row.className = "task_item";
-
-    var p_details = document.createElement("td");
-    p_details.text = task_list[i];
-
-    div_row.appendChild(p_details);
-    populate_cards.appendChild(div_row);
-  }
 
 
   function get(name){
@@ -158,7 +171,8 @@
   });
 
   $('#populate_tasks').click(function () {
-    $jqValue.text('Getting Tasks...');
+    $('.populate_tasks').text('Getting Tasks...');
+    get_worker_tasks(worker_sid);
   });
 
 </script>
