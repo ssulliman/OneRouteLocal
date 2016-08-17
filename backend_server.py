@@ -60,6 +60,7 @@ def flash_worker_login():
         flash('Permission denied: invalid username and password combination')
         return render_template('worker_login.html')
 
+
 @app.route("/get_worker_details", methods=['GET', 'POST'])
 def get_worker_details():
     username = request.args.get('user')
@@ -81,9 +82,12 @@ def get_worker_details():
 
     return jsonify(responseDict);
 
-@app.route("/get_worker_tasks") 
+
+@app.route("/get_worker_tasks", methods=['GET', 'POST']) 
 def get_worker_task_queues(): 
     worker_sid = request.args.get('worker_sid')
+    worker = twilio_client.workers(workspace_sid).get(worker_sid)
+    print worker.task
     responseDict = {}
 
 
@@ -110,6 +114,7 @@ def change_worker_state():
     else:
         print "Activity State was not found in the system, or WorkerSid does not exist in Taskrouter check Request Again"
 
+
 @app.route("/get_taskqueue_list", methods=['GET', 'POST'])
 def get_worker_reservation_list():
     json_dict = request.json
@@ -125,6 +130,7 @@ def get_worker_reservation_list():
 
     else:
         print "TaskQueue Name is invalid"
+
 
 @app.route("/make_call", methods=['POST'])
 def make_call():

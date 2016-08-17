@@ -92,8 +92,8 @@
 
 
 
-  function get_worker_tasks(task_queue_sid) {
-    httpGetAsync("https://one-route.herokuapp.com/get_worker_tasks?worker_sid=" + task_queue_sid, tasks_callback);
+  function get_worker_tasks(worker_sid) {
+    httpGetAsync("https://one-route.herokuapp.com/get_worker_tasks?worker_sid=" + worker_sid, tasks_callback);
   }
 
   function tasks_callback(responseText) {
@@ -161,7 +161,7 @@
   });
 
   $('#populate_tasks').click(function () {
-    document.getElementById('populate_tasks').text = "Getting tasks..."
+    document.getElementById('populate_tasks').textContent = "Getting tasks..."
     get_worker_tasks(worker_sid);
   });
 
