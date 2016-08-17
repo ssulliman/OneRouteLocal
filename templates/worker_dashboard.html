@@ -42,7 +42,7 @@
                       <td>Task 3</td>
                   </tr>
               </tbody>
-      </table>
+        </table>
     </div>
 
 
@@ -67,7 +67,10 @@
          } );
   } );
 
-  function get(name){
+  // Set greeting name 
+  document.getElementById('welcome_name').innerHTML = worker_name;
+
+  function get(name) {
      if(name=(new RegExp('[?&]'+encodeURIComponent(name)+'=([^&]*)')).exec(location.search))
         return decodeURIComponent(name[1]);
   }
@@ -85,15 +88,12 @@
   activities_hash['Reserved'] = {activitySid:"WA736c2c738b74abb7783e56de6c81ca2f"}
   activities_hash['Offline'] = {activitySid:"WA78c2554801eddb4b8c19aa0fb6279364"}
 
-  if(history.replaceState) history.replaceState({}, "", "/worker_dashboard.html");
-  document.getElementById('welcome_name').innerHTML = worker_name;
-
-
 
 
 
   function get_worker_tasks(worker_sid) {
     httpGetAsync("https://one-route.herokuapp.com/get_worker_tasks?worker_sid=" + worker_sid, tasks_callback);
+    console.log(worker_sid)
   }
 
   function tasks_callback(responseText) {
