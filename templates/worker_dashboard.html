@@ -135,6 +135,8 @@
       var populate_cards = document.getElementById("tasks");
 
       task_list.forEach(function (item, key, task_list) {
+        console.log(key + " :  " + item)
+
         var div_row = document.createElement("tr");
         div_row.className = "task_item";
 
