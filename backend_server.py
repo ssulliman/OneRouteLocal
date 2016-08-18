@@ -3,6 +3,9 @@
 # Use to get port # from Heroku environment
 from os import environ
 
+# DB STUFF
+from flask.ext.sqlalchemy import SQLAlchemy
+
 # JSON import
 import json
 from bson import json_util
@@ -11,6 +14,12 @@ from bson import json_util
 from flask import Flask, flash, Response, jsonify, request, render_template
 app = Flask(__name__)
 app.secret_key = 'bc730ade0c837ba6c39e' # Random secret key
+
+# DB STUFF
+
+from flask.ext.sqlalchemy import SQLAlchemy
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://bptlvaszpnblcm:ydsyOae0cNzbQsH_cnc2Hz4wwF@ec2-54-243-202-174.compute-1.amazonaws.com:5432/d6ucddsvp9ne1a'
+db = SQLAlchemy(app)
 
 # Mongo import and connection to OneRoute database
 from pymongo import MongoClient
@@ -37,6 +46,23 @@ task_router = TwilioTaskRouterClient(account_sid, auth_token)
 #Twilio Voice Client
 twilio_client = TwilioRestClient(account_sid, auth_token)
 
+# DB STUFF
+
+# Create our database model
+
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80))
+    email = db.Column(db.String(120), unique=True)
+
+    def __init__(self, name, email):
+        self.name = name
+        self.email = email
+
+    def __repr__(self):
+        return '<Name %r>' % self.name
+
+
 # Define Flask routes
 # =========== HTML Routes ===========
 @app.route("/")
@@ -44,7 +70,7 @@ def root():
     return render_template('worker_login.html')
 
 
-@app.route("/worker_dashboard")
+@app.route("/worker_dashboard.html")
 def show_worker_dashboard():
     friendly_name = request.args.get('worker_name')
     if (friendly_name):
@@ -82,6 +108,19 @@ def get_worker_details():
 
     return jsonify(responseDict);
 
+
+@app.route("/get_worker_tasks", methods=['GET', 'POST']) 
+def get_worker_task_queues(): 
+    worker_sid = request.args.get('worker_sid')
+    worker = task_router.workers(workspace_sid).get(worker_sid)
+    print worker.activity_sid
+    print worker.activity_name
+    responseDict = {}
+
+
+    return jsonify(responseDict);
+
+
 @app.route("/change_worker_state", methods=['GET', 'POST'])
 def change_worker_state():
     activity_sid_map = {
@@ -102,6 +141,7 @@ def change_worker_state():
     else:
         print "Activity State was not found in the system, or WorkerSid does not exist in Taskrouter check Request Again"
 
+
 @app.route("/get_taskqueue_list", methods=['GET', 'POST'])
 def get_worker_reservation_list():
     json_dict = request.json
@@ -117,6 +157,7 @@ def get_worker_reservation_list():
 
     else:
         print "TaskQueue Name is invalid"
+
 
 @app.route("/make_call", methods=['POST'])
 def make_call():
