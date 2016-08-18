@@ -3,6 +3,9 @@
 # Use to get port # from Heroku environment
 from os import environ
 
+# DB STUFF
+from flask.ext.sqlalchemy import SQLAlchemy
+
 # JSON import
 import json
 from bson import json_util
@@ -11,6 +14,12 @@ from bson import json_util
 from flask import Flask, flash, Response, jsonify, request, render_template
 app = Flask(__name__)
 app.secret_key = 'bc730ade0c837ba6c39e' # Random secret key
+
+# DB STUFF
+
+from flask.ext.sqlalchemy import SQLAlchemy
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://bptlvaszpnblcm:ydsyOae0cNzbQsH_cnc2Hz4wwF@ec2-54-243-202-174.compute-1.amazonaws.com:5432/d6ucddsvp9ne1a'
+db = SQLAlchemy(app)
 
 # Mongo import and connection to OneRoute database
 from pymongo import MongoClient
@@ -36,6 +45,23 @@ task_router = TwilioTaskRouterClient(account_sid, auth_token)
 
 #Twilio Voice Client
 twilio_client = TwilioRestClient(account_sid, auth_token)
+
+# DB STUFF
+
+# Create our database model
+
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80))
+    email = db.Column(db.String(120), unique=True)
+
+    def __init__(self, name, email):
+        self.name = name
+        self.email = email
+
+    def __repr__(self):
+        return '<Name %r>' % self.name
+
 
 # Define Flask routes
 # =========== HTML Routes ===========
