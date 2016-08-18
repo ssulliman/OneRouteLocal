@@ -31,7 +31,7 @@
                   </tr>
               </thead>
 
-              <tbody>
+              <tbody id="task_table_body">
                   <tr>
                       <td>Task 1</td>
                   </tr>
@@ -132,7 +132,7 @@
 
   function populate_task_list(task_list) 
   {
-      var populate_cards = document.getElementById("tasks");
+      var populate_cards = document.getElementById("task_table_body");
 
       task_list.forEach(function (item, key, task_list) {
         console.log(key + " :  " + item)
