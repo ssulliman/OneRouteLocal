@@ -104,7 +104,7 @@
 
     var responseData = JSON.parse(responseText);
 
-    for (key, item in responseData) {
+    for key, item in responseData.iteritems() {
       console.log(key + " :  "  item)
     }
 
