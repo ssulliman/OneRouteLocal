@@ -109,8 +109,8 @@ def get_worker_details():
     return jsonify(responseDict);
 
 
-@app.route("/get_worker_tasks", methods=['GET', 'POST']) 
-def get_worker_task_queues(): 
+@app.route("/get_worker_tasks", methods=['GET', 'POST'])
+def get_worker_task_queues():
     worker_sid = request.args.get('worker_sid')
     worker = task_router.workers(workspace_sid).get(worker_sid)
     print worker.activity_sid
@@ -164,7 +164,7 @@ def make_call():
     json_dict = request.json
     to_number = json_dict["to"]
     from_number = json_dict["from"]
-    call = client.calls.create(url="http://demo.twilio.com/docs/voice.xml",to=to_number,from_=from_number)
+    call = twilio_client.calls.create(url="http://demo.twilio.com/docs/voice.xml",to=to_number,from_=from_number)
     print(call.sid)
 
 
