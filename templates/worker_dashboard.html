@@ -21,7 +21,7 @@
   <div class="container">
     <h1>Welcome, <span id="welcome_name"></span>!</h1><br><br>
 
-    <h2>Tasks waiting</h2>
+    <h2>Current Task</h2>
 
     <div>
       <table id="tasks" class="display" cellspacing="0" width="100%">
@@ -99,12 +99,18 @@
 
   function tasks_callback(responseText) {
     console.log("Made it to the tasks callback...");
+    document.getElementById('populate_tasks').innerHTML = "Populate Tasks"
+
     var responseData = JSON.parse(responseText);
     var activity_sid = responseData["ActivitySid"];
     var activity_name = responseData["ActivityName"];
+    var activity_data = new Map();
 
-    //   populate_task_list(task_list);
-    document.getElementById('populate_tasks').innerHTML = "Populate Tasks"
+    activity_data.set("activity_sid", activity_sid);
+    activity_data.set("activity_name", activity_name);
+
+
+    populate_task_list(activity_data);
   }
 
   function httpGetAsync(theUrl, callback)
@@ -142,17 +148,14 @@
 
   $('#active_btn').click(function () {
     $jqValue.text('Your current worker state:  Active');
-    taskrouter_worker.updateActivity(activities_hash['Idle'].activitySid)
   });
 
   $('#busy_btn').click(function () {
     $jqValue.text('Your current worker state:  Busy');
-
   });
 
   $('#idle_btn').click(function () {
     $jqValue.text('Your current worker state:  Idle');
-    taskrouter_worker.update(activities_hash['Idle'].activitySid)
   });
 
   $('#reserved_btn').click(function () {
