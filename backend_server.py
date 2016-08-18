@@ -19,7 +19,7 @@ app.secret_key = 'bc730ade0c837ba6c39e' # Random secret key
 
 from flask.ext.sqlalchemy import SQLAlchemy
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://bptlvaszpnblcm:ydsyOae0cNzbQsH_cnc2Hz4wwF@ec2-54-243-202-174.compute-1.amazonaws.com:5432/d6ucddsvp9ne1a'
-db = SQLAlchemy(app)
+PGdb = SQLAlchemy(app)
 
 # Mongo import and connection to OneRoute database
 from pymongo import MongoClient
@@ -51,9 +51,9 @@ twilio_client = TwilioRestClient(account_sid, auth_token)
 # Create our database model
 
 class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(80))
-    email = db.Column(db.String(120), unique=True)
+    id = PGdb.Column(db.Integer, primary_key=True)
+    name = PGdb.Column(db.String(80))
+    email = PGdb.Column(db.String(120), unique=True)
 
     def __init__(self, name, email):
         self.name = name
