@@ -50,7 +50,7 @@ twilio_client = TwilioRestClient(account_sid, auth_token)
 
 # Create our database model
 
-class User(db.Model):
+class User(PGdb.Model):
     id = PGdb.Column(PGdb.Integer, primary_key=True)
     name = PGdb.Column(PGdb.String(80))
     email = PGdb.Column(PGdb.String(120), unique=True)
