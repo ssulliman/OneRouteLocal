@@ -16,7 +16,7 @@ app = Flask(__name__)
 app.secret_key = 'bc730ade0c837ba6c39e' # Random secret key
 
 # DB STUFF
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://bptlvaszpnblcm:ydsyOae0cNzbQsH_cnc2Hz4wwF@ec2-54-243-202-174.compute-1.amazonaws.com:5432/d6ucddsvp9ne1a'
 db = SQLAlchemy(app)
 
 # Mongo import and connection to OneRoute database
