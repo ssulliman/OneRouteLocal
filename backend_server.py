@@ -10,15 +10,40 @@ from flask.ext.sqlalchemy import SQLAlchemy
 import json
 from bson import json_util
 
+
+
 # Flask import
 from flask import Flask, flash, Response, jsonify, request, render_template
+
+
 app = Flask(__name__)
 app.secret_key = 'bc730ade0c837ba6c39e' # Random secret key
 
 # DB STUFF
 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://bptlvaszpnblcm:ydsyOae0cNzbQsH_cnc2Hz4wwF@ec2-54-243-202-174.compute-1.amazonaws.com:5432/d6ucddsvp9ne1a'
+
+
 db = SQLAlchemy(app)
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(80))
+    email = db.Column(db.String(120), unique=True)
+
+    def __init__(self, name, email):
+        self.name = name
+        self.email = email
+
+    def __repr__(self):
+        return '<Name %r>' % self.name
+
+db.create_all()
+
+
+
+
+
+
 
 # Mongo import and connection to OneRoute database
 
