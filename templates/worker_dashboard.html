@@ -104,8 +104,8 @@
 
     var responseData = JSON.parse(responseText);
 
-    for key, item in responseData.iteritems() {
-      console.log(key + " :  "  item)
+    for (key in responseData) {
+      console.log(key + " :  "  responseData[key])
     }
 
     var activity_sid = responseData["ActivitySid"];
