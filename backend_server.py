@@ -17,18 +17,20 @@ app.secret_key = 'bc730ade0c837ba6c39e' # Random secret key
 
 # DB STUFF
 
-from flask.ext.sqlalchemy import SQLAlchemy
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://bptlvaszpnblcm:ydsyOae0cNzbQsH_cnc2Hz4wwF@ec2-54-243-202-174.compute-1.amazonaws.com:5432/d6ucddsvp9ne1a'
 db = SQLAlchemy(app)
 
 # Mongo import and connection to OneRoute database
-from pymongo import MongoClient
+
+# from pymongo import MongoClient
+
 # The following is the MongoDB URI that we obtain from mLab
 # mLab is our Heroku MongoDB provider
-mongo_user = "one_route_dev"
-mongo_pass = "oneroutedev"
-mongo_client = MongoClient('mongodb://' + mongo_user + ':' + mongo_pass + '@ds027145.mlab.com:27145/one_route')
-db = mongo_client.one_route
+
+# mongo_user = "one_route_dev"
+# mongo_pass = "oneroutedev"
+# mongo_client = MongoClient('mongodb://' + mongo_user + ':' + mongo_pass + '@ds027145.mlab.com:27145/one_route')
+# db = mongo_client.one_route
 
 # Twilio import
 from twilio.rest import TwilioTaskRouterClient, TwilioRestClient
