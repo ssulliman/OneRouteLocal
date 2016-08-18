@@ -113,10 +113,12 @@ def get_worker_details():
 def get_worker_task_queues():
     worker_sid = request.args.get('worker_sid')
     worker = task_router.workers(workspace_sid).get(worker_sid)
-    print worker.activity_sid
-    print worker.activity_name
     responseDict = {}
 
+    responseDict["activity_sid"] = worker.activity_sid
+    responseDict["activity_name"] = worker.activity_name
+
+    print worker.activity_name
 
     return jsonify(responseDict);
 

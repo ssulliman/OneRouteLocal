@@ -31,7 +31,7 @@
                   </tr>
               </thead>
 
-              <tbody>
+              <tbody id="task_table_body">
                   <tr>
                       <td>Task 1</td>
                   </tr>
@@ -64,6 +64,8 @@
   $(document).ready(function() {
       $('#tasks').DataTable( {
               "paging": false,
+              "searching": false,
+              "info": false
          } );
   } );
 
@@ -132,7 +134,7 @@
 
   function populate_task_list(task_list) 
   {
-      var populate_cards = document.getElementById("tasks");
+      var populate_cards = document.getElementById("task_table_body");
 
       task_list.forEach(function (item, key, task_list) {
         console.log(key + " :  " + item)
@@ -141,7 +143,7 @@
         div_row.className = "task_item";
 
         var p_details = document.createElement("td");
-        p_details.text = item;
+        p_details.innerHTML = item;
 
         div_row.appendChild(p_details);
         populate_cards.appendChild(div_row);
