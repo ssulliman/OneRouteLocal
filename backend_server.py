@@ -44,6 +44,22 @@ task_router = TwilioTaskRouterClient(account_sid, auth_token)
 #Twilio Voice Client
 twilio_client = TwilioRestClient(account_sid, auth_token)
 
+# DB STUFF
+
+# Create our database model
+class TestTable(db.Model):
+    __tablename__ = "users"
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(120), unique=True)
+
+    def __init__(self, email):
+        self.email = email
+
+    def __repr__(self):
+        return '<E-mail %r>' % self.email
+
+
+
 # Define Flask routes
 # =========== HTML Routes ===========
 @app.route("/")
