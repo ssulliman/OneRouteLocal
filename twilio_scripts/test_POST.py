@@ -19,8 +19,8 @@ result = requests.post("https://one-route.herokuapp.com/create_task", json=task_
 reservation_resp = requests.get("https://one-route.herokuapp.com/get_worker_reservations", json=worker_state)
 
 #resp = requests.get("https://one-route.herokuapp.com/get_taskqueue_list", json=worker_state)
-task_dict = json.loads(resp.json().get("1"))
-print task_dict["phone_number"]
+#task_dict = json.loads(resp.json().get("1"))
+#print task_dict["phone_number"]
 
 phone_attributes = {}
 phone_attributes["to"] = task_dict["phone_number"]
