@@ -22,8 +22,9 @@ reservation_resp = requests.get("https://one-route.herokuapp.com/get_worker_rese
 #task_dict = json.loads(resp.json().get("1"))
 #print task_dict["phone_number"]
 
-phone_attributes = {}
+'''phone_attributes = {}
 phone_attributes["to"] = task_dict["phone_number"]
 phone_attributes["from"] = "+14082146768"
 requests.post("https://one-route.herokuapp.com/make_call", json=phone_attributes)
 #print resp.text
+'''

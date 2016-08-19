@@ -165,7 +165,7 @@ def get_worker_reservations():
     json_dict = request.json
     if((len(json_dict["WorkerSid"]) > 0)):
         worker_sid = json_dict["WorkerSid"]
-        for reservation in client.workers(workspace_sid).get(worker_sid).reservations.list():
+        for reservation in task_router.workers(workspace_sid).get(worker_sid).reservations.list():
             print(reservation.reservation_status)
             print(reservation.worker_name)
 
