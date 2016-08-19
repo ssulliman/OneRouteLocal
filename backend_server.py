@@ -169,6 +169,8 @@ def get_worker_reservations():
             print(reservation.reservation_status)
             print(reservation.worker_name)
 
+    return Response("{}", status=200, mimetype='application/json')
+
 @app.route("/make_call", methods=['POST'])
 def make_call():
     json_dict = request.json
