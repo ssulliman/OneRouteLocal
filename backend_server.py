@@ -145,7 +145,7 @@ def change_worker_state():
 
 
 @app.route("/get_taskqueue_list", methods=['GET', 'POST'])
-def get_worker_reservation_list():
+def get_taskqueue_list():
     json_dict = request.json
     task_assignment_map = {}
     if(len(json_dict["TaskQueueName"]) > 0):
@@ -160,6 +160,14 @@ def get_worker_reservation_list():
     else:
         print "TaskQueue Name is invalid"
 
+@app.route("/get_worker_reservations", methods=['GET'])
+def get_worker_reservations():
+    json_dict = request.json
+    if((len(json_dict["WorkerSid"]) > 0)):
+        worker_sid = json["WorkerSid"]
+        for reservation in client.workers(workspace_sid).get(worker_sid).reservations.list():
+            print(reservation.reservation_status)
+            print(reservation.worker_name)
 
 @app.route("/make_call", methods=['POST'])
 def make_call():
