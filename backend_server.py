@@ -249,12 +249,11 @@ def event_callback():
         task = task_router.tasks(workspace_sid).get(task_sid)
         worker = task_router.workers(workspace_sid).get(worker_sid)
         #TODO-Send a message when reservation is Accepted'
-        print worker.attributes
+        print worker.attributes[2]
         print task.attributes
 
         worker_attributes = jsonify(worker.attributes)
         task_attributes = jsonify(task.attributes)
-        print worker_attributes["phone_number"]
         print task_attributes
         body_message = "Hello Steve, is ready to take your call right now. Please call him at %s" %(worker_attributes["phone_number"])
         twilio_client.messages.create(to=task_attributes["phone_number"], from_=worker_attributes["phone_number"],body=body_message)
