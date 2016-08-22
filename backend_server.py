@@ -245,8 +245,13 @@ def event_callback():
         print "Making a call to a phone number"
         print "\nReservation is accepted"
         task_sid = form_dict["TaskSid"]
+        worker_sid = form_dict["WorkerSid"]
         task = task_router.tasks(workspace_sid).get(task_sid)
-        print task.attributes
+        worker = task_router.worker(workspace_sid).get(worker_sid)
+        #TODO-Send a message when reservation is Accepted
+        print task.attributes["phone_number"]
+        #twilio_client.messages.create(to="")
+
         #call = voice_client.calls.create(url="http://demo.twilio.com/docs/voice.xml", to=task.attributes["phone_number"], from_="+14082146768")
         #print(call.sid)
 
