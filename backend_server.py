@@ -240,6 +240,10 @@ def event_callback():
     elif(form_dict["EventType"] == "reservation.created"):
         print "Reservation is Created"
 
+        ''' TODO-As soon as reservation is created find out what state it is in,
+        if pending send the estimated time and then send the text to the user.
+        '''
+
     elif(form_dict["EventType"] == "reservation.accepted"):
         #TODO-Push accepted reservation to the corresponding worker with the TaskSID
         print "Making a call to a phone number"
@@ -248,15 +252,10 @@ def event_callback():
         worker_sid = form_dict["WorkerSid"]
         task = task_router.tasks(workspace_sid).get(task_sid)
         worker = task_router.workers(workspace_sid).get(worker_sid)
-        #TODO-Send a message when reservation is Accepted'
-        print worker.attributes[2]
-        print task.attributes
+        #TODO-Bridge the calll when the reservation is accepted
+        print worker.attributes
+        print task.attributes['phone_number']
 
-        worker_attributes = jsonify(worker.attributes)
-        task_attributes = jsonify(task.attributes)
-        print task_attributes
-        body_message = "Hello Steve, is ready to take your call right now. Please call him at %s" %(worker_attributes["phone_number"])
-        twilio_client.messages.create(to=task_attributes["phone_number"], from_=worker_attributes["phone_number"],body=body_message)
         #call = voice_client.calls.create(url="http://demo.twilio.com/docs/voice.xml", to=task.attributes["phone_number"], from_="+14082146768")
         #print(call.sid)
 
