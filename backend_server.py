@@ -255,7 +255,7 @@ def event_callback():
         worker_attributes = jsonify(worker.attributes)
         task_attributes = jsonify(task.attributes)
         print worker_attributes["phone_number"]
-        print task_attributes["phone_number"]
+        print task_attributes
         body_message = "Hello Steve, is ready to take your call right now. Please call him at %s" %(worker_attributes["phone_number"])
         twilio_client.messages.create(to=task_attributes["phone_number"], from_=worker_attributes["phone_number"],body=body_message)
         #call = voice_client.calls.create(url="http://demo.twilio.com/docs/voice.xml", to=task.attributes["phone_number"], from_="+14082146768")
