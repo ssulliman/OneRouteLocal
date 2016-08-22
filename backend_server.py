@@ -254,10 +254,12 @@ def event_callback():
         worker = task_router.workers(workspace_sid).get(worker_sid)
         task_attributes = json.loads(task.attributes)
         worker_attributes = json.loads(worker.attributes)
+        customer_phone = task_attributes["phone_number"]
+        representative_phone = worker_attributes["phone_number"]
         #TODO-Bridge the calll when the reservation is accepted
         body = "Bridging between customer %s, %s, and Representative %s,%s\n" %(task_attributes["customer_name"], task_attributes["phone_number"], worker.friendly_name, worker_attributes["phone_number"])
         print body
-        call = twilio_client.calls.create(url="http://demo.twilio.com/docs/voice.xml", to=task.attributes["phone_number"], from_=worker_attributes["phone_number"])
+        call = twilio_client.calls.create(url="http://demo.twilio.com/docs/voice.xml", to=customer_phone, from_=representative_phone)
         #print(call.sid)
 
     elif(form_dict["EventType"] == "reservation.rejected"):
