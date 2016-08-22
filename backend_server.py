@@ -255,7 +255,7 @@ def event_callback():
 
         #TODO-Bridge the calll when the reservation is accepted
         print worker.attributes
-        worker_attributes = json.dumps(worker.attributes)
+        worker_attributes = jsonify(worker.attributes)
         print worker_attributes["phone_number"]
         #call = voice_client.calls.create(url="http://demo.twilio.com/docs/voice.xml", to=task.attributes["phone_number"], from_="+14082146768")
         #print(call.sid)
