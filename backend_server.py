@@ -252,7 +252,7 @@ def event_callback():
         worker_sid = form_dict["WorkerSid"]
         task = task_router.tasks(workspace_sid).get(task_sid)
         worker = task_router.workers(workspace_sid).get(worker_sid)
-        for k,v in worker.attributes.keys()::
+        for k,v in worker.attributes.keys():
             print k, v
         #TODO-Bridge the calll when the reservation is accepted
         print worker.attributes
