@@ -11,7 +11,6 @@ import json
 from bson import json_util
 
 
-
 # Flask import
 from flask import Flask, flash, Response, jsonify, request, render_template
 
