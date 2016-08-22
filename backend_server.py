@@ -249,6 +249,8 @@ def event_callback():
         task = task_router.tasks(workspace_sid).get(task_sid)
         worker = task_router.workers(workspace_sid).get(worker_sid)
         #TODO-Send a message when reservation is Accepted'
+        print worker.attributes
+        print task.attributes
         print worker.attributes["phone_number"]
         print task.attributes["phone_number"]
         #twilio_client.messages.create(to="")
