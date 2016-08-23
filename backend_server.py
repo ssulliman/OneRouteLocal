@@ -20,7 +20,7 @@ app.secret_key = 'bc730ade0c837ba6c39e' # Random secret key
 
 # DB STUFF
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://yipdouwdkxwjip:teHxg0-r9B89QU7pzxdq1yfiPP@ec2-54-243-55-26.compute-1.amazonaws.com:5432/dedpgifroi0k65'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://edmeeidsoanzkg:8oijr_O8B8_RjIk-fg46lEcBuu@ec2-23-21-55-25.compute-1.amazonaws.com:5432/d2h70ose55s4h0'
 
 heroku = Heroku(app)
 db = SQLAlchemy(app)
