@@ -1,0 +1,34 @@
+Workers
+- worker_sid ... pk
+- taskqueue_name_sid
+- * tasks (array of tasks)
+- attributes - json
+- username
+- password
+- * taskqueue
+
+Task
+- task_sid
+- customer_name
+- phone_number
+- preferences
+- assignment_status
+- worker_sid ... pk
+
+TaskQueue
+- 
+
+
+Steps:
+0. Change to the Guest_BYOD network
+1. Go to aws.amazon.com
+2. Download samir_deepak_key.pem from the email
+3. Turn the proxyon
+4. ssh -i ~/Downloads/samir_deepak_key.pem ec2-user@ec2-52-23-168-88.compute-1.amazonaws.com
+5. heroku login
+6. 
+
+
+
+
+

@@ -20,27 +20,45 @@ app.secret_key = 'bc730ade0c837ba6c39e' # Random secret key
 
 # DB STUFF
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://bptlvaszpnblcm:ydsyOae0cNzbQsH_cnc2Hz4wwF@ec2-54-243-202-174.compute-1.amazonaws.com:5432/d6ucddsvp9ne1a'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://yipdouwdkxwjip:teHxg0-r9B89QU7pzxdq1yfiPP@ec2-54-243-55-26.compute-1.amazonaws.com:5432/dedpgifroi0k65'
 
-
+heroku = Heroku(app)
 db = SQLAlchemy(app)
+
+# Create our database model
 class User(db.Model):
+    __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(80))
     email = db.Column(db.String(120), unique=True)
 
-    def __init__(self, name, email):
-        self.name = name
+    def __init__(self, email):
         self.email = email
 
     def __repr__(self):
-        return '<Name %r>' % self.name
+        return '<E-mail %r>' % self.email
 
-db.create_all()
+# Set "homepage" to index.html
+@app.route('/')
+def index():
+    return render_template('index.html')
 
+# Save e-mail to database and send to success page
+@app.route('/prereg', methods=['POST'])
+def prereg():
+    email = None
+    if request.method == 'POST':
+        email = request.form['email']
+        # Check that email does not already exist (not a great query, but works)
+        if not db.session.query(User).filter(User.email == email).count():
+            reg = User(email)
+            db.session.add(reg)
+            db.session.commit()
+            return render_template('success.html')
+    return render_template('index.html')
 
-
-
+if __name__ == '__main__':
+    app.debug = True
+    app.run()
 
 
 
@@ -71,22 +89,6 @@ task_router = TwilioTaskRouterClient(account_sid, auth_token)
 
 #Twilio Voice Client
 twilio_client = TwilioRestClient(account_sid, auth_token)
-
-# DB STUFF
-
-# Create our database model
-
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(80))
-    email = db.Column(db.String(120), unique=True)
-
-    def __init__(self, name, email):
-        self.name = name
-        self.email = email
-
-    def __repr__(self):
-        return '<Name %r>' % self.name
 
 
 # Define Flask routes

@@ -1,0 +1,14 @@
+CREATE TABLE worker(
+   worker_sid VARCHAR(50),
+   worker_friendly_name VARCHAR(50),
+   username VARCHAR(50),
+   password VARCHAR(50),
+   PRIMARY KEY( worker_sid )
+);
+
+INSERT INTO worker (worker_sid, worker_friendly_name, username,password) VALUES ("101", "worker101", "myFirstWorker", "firstWorkerPW");
+
+
+Worker: worker_sid, worker_friendly_name, username, password
+Customer: task_sid, other Customer info (ex: name, phone#, etc)
+(Look-up table) TaskQueue: task_queue_sid, worker_sid
